@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import Home from './pages/Home';
+import Login from './pages/Login';
+import ProtectedRoutes from './components/ProtectedRoutes';
+import NotAuthRoutes from './components/NotAuthRoutes';
+import {  AuthProvider } from './components/AuthContext';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Routes>
+        {/* 로그인한 사람만 갈 수 있는 경로 */}
+        <Route element={<ProtectedRoutes />}>
+          <Route path='/' element={<Home />} />
+        </Route>
+        
+        {/* 로그인한 사람은 갈 수 없는 경로 */}
+        <Route element={<NotAuthRoutes />}>
+          <Route path='/login' element={<Login />} />
+        </Route>
+      </Routes>
+    </AuthProvider>
   );
 }
 

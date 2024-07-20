@@ -1,0 +1,27 @@
+.aside__inner {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+
+  .aside__profile {
+    margin-top: 10px;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .aside__info {
+    margin-top: 15px;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      margin-top: 5px;
+    }
+  }
+}

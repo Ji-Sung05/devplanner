@@ -1,0 +1,16 @@
+.logoutBtn {
+  @include flex-center;
+  width: 280px;
+  color: var(--white);
+  border: 1px solid #fff;
+  margin: 0 auto;
+  margin-top: 5px;
+  padding: 8px 0;
+  border-radius: 10px;
+  background-color: var(--inner-co);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--inner-dark-co);
+  }
+}

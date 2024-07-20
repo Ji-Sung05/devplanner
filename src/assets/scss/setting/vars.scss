@@ -1,0 +1,47 @@
+:root {
+  --mainfont-SOGANGUNIVERSITYTTF: "SOGANGUNIVERSITYTTF";
+
+  --black: #000;
+  --black100: #3b3a3a;
+  --black200: #565656;
+  --black300: #c4c3c3;
+  --black400: #cdcbcb;
+  --black500: #eee;
+  --black600: #2E2E30;
+  --black700: #3f3f4390;
+  --black800: #E4E4E4;
+  
+  --white: #fff;
+  --white100: #fff;
+  --white200: #fff;
+  --white300: #fff;
+  --white400: #fff;
+  --white500: #fff;
+
+  --main-bg: #1a1a1a;
+  --line-co: #5f5f5f;
+  --inner-co: #262626;
+  --inner-dark-co: #1e1e1e;
+  --text-co: #565656;
+  --place-line-co: #D9D9D9;
+  --li-co: #FF7410;
+  --newBtn-co: #0FA115;
+  
+  // 폰트 셋팅
+  font-family: var(--mainfont-SOGANGUNIVERSITYTTF);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  
+  // 폰트 최적화
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  @media (max-width: 800px) {
+      font-size: 14px;
+      line-height: 1.4;
+  }
+}
