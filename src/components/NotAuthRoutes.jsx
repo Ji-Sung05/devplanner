@@ -5,7 +5,7 @@ import { AuthContext } from './AuthContext';
 const NotAuthRoutes = () => {
   const { isAuth } = useContext(AuthContext);
   return (
-    isAuth ? <Navigate to={'/'} /> : <Outlet />
+    isAuth ? <Navigate to={'/home'} /> : <Outlet />
   )
 }
 

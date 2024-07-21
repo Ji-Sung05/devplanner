@@ -5,7 +5,7 @@ import { AuthContext } from './AuthContext';
 const ProtectedRoutes = () => {
   const { isAuth } = useContext(AuthContext);
   return (
-    isAuth ? <Outlet /> : <Navigate to={'/login'} />
+    isAuth ? <Outlet /> : <Navigate to={'/'} />
   )
 }
 

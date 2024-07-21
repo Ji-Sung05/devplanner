@@ -13,13 +13,13 @@ const BottomHeader = () => {
   return (
     <div className='bottomHeader'>
       <ul className='nav'>
-        <li  className={pathname === '/' ? 'active' : ''}>
+        <li  className={pathname === '/home' ? 'active' : ''}>
           <Link className='nav-link' to="/">
             <HiOutlineBookOpen color='white' size={'20px'} />
             <span className='nav-text'>Overview</span>
           </Link>
         </li>
-        {pathname === '/organization' || pathname === '/stars' || pathname === '/' ? (
+        {pathname === '/organization' || pathname === '/stars' || pathname === '/home' ? (
           <li className={pathname === '/organization' ? 'active' : ''}>
             <Link className='nav-link' to="/organization">
               <MdComputer color='white' size={'20px'} />
