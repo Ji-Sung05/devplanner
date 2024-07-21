@@ -5,6 +5,8 @@ import Login from './pages/Login';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import NotAuthRoutes from './components/NotAuthRoutes';
 import {  AuthProvider } from './components/AuthContext';
+import Organization from './pages/Organization';
+import Stars from './pages/Stars';
 
 function App() {
 
@@ -14,6 +16,8 @@ function App() {
         {/* 로그인한 사람만 갈 수 있는 경로 */}
         <Route element={<ProtectedRoutes />}>
           <Route path='/' element={<Home />} />
+          <Route path='/organization' element={<Organization />} />
+          <Route path='/stars' element={<Stars />} />
         </Route>
         
         {/* 로그인한 사람은 갈 수 없는 경로 */}
