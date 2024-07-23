@@ -1,0 +1,14 @@
+.createBtn {
+  @include flex-center;
+  padding: 0 10px;
+  margin-top: 20px;
+  gap: 7px;
+  height: 28px;
+  border-radius: 5px;
+  color: white;
+  background-color: var(--newBtn-co);
+  cursor: pointer;
+  &:hover {
+    background-color: var(--newBtn-hover-co);
+  }
+}

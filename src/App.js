@@ -8,6 +8,8 @@ import {  AuthProvider } from './components/AuthContext';
 import Organization from './pages/Organization';
 import Stars from './pages/Stars';
 import Repositories from './pages/Repositories';
+import CreateRepo from './pages/CreateRepo';
+import Work from './pages/Work';
 
 function App() {
 
@@ -19,7 +21,9 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/organization' element={<Organization />} />
           <Route path='/repositories' element={<Repositories />} />
+          <Route path='/create-repo' element={<CreateRepo />} />
           <Route path='/stars' element={<Stars />} />
+          <Route path='/work' element={<Work />} />
         </Route>
         
         {/* 로그인한 사람은 갈 수 없는 경로 */}

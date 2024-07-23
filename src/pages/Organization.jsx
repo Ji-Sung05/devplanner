@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import Home from './Home'
 import { RiFileAddLine } from "react-icons/ri";
-import { useGetOrgsQuery, useGetReposQuery } from '../app/usersSlice'
+import { useGetOrgsQuery } from '../app/apiSlice'
 
 const Organization = () => {
   const { data: orgs, isLoading } = useGetOrgsQuery();
-  const [org, setOrg] = useState('');
   const navigate = useNavigate();
-  
-  const { data: repos } = useGetReposQuery(org, {
-    skip: !org,
-  });
 
-  useEffect(() => {
-    if (repos) {
-      navigate('/repositories', { state: { repos } });
-    }
-  }, [repos, navigate]);
+  const moveRepoPage = (orgs) => {
+    navigate('/repositories', { state: { orgs } });
+  }
 
   return (
     <Home id='orgs'>
@@ -33,7 +26,7 @@ const Organization = () => {
           {orgs && orgs.map((org, key) => (
             <article key={key} className='orgs'>
               <div className='orgs__top' onClick={() => {
-                setOrg(org.login)
+                moveRepoPage(org.login)
               }}>
                 <img src={org.avatar_url} alt="orgs 이미지" />
                 <h3>{org.login}</h3>

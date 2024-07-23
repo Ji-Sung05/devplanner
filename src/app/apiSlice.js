@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getCookie } from "../cookies/Cookies";
-console.log(getCookie('token'))
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
@@ -16,8 +15,23 @@ export const apiSlice = createApi({
   endpoints: builder => ({
     getOrgs: builder.query({
       query: () => "/organizations"
+    }),
+    getRepos: builder.query({
+      query: (orgName) => `/repos/${orgName}`
+    }),
+    createRepo: builder.mutation({
+      query: ({ orgName, repoName, description, visibility }) => ({
+        url: `/create-repo`,
+        method: 'POST',
+        body: {
+          orgName,
+          repoName,
+          description,
+          visibility
+        }
+      })
     })
   })
 })
 
-export const { useGetOrgsQuery } = apiSlice
+export const { useGetOrgsQuery, useGetReposQuery, useCreateRepoMutation } = apiSlice

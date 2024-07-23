@@ -1,0 +1,113 @@
+.createrepo__inner {
+  color: var(--white);
+  width: 400px;
+  margin: 0 auto;
+  h3 {
+    margin-top: 30px;
+    font-size: 28px;
+    letter-spacing: 1.2px;
+  }
+
+  .createrepo__owner {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    position: relative;
+
+    .owner {
+      div {
+        width: 140px;
+        height: 30px;
+        padding: 0 3px;
+        border-radius: 3px;
+        background-color: var(--line-co);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        img {
+          width: 25px;
+          border-radius: 50%;
+        }
+      }
+      input {
+        color: inherit;
+        font-size: 12px;
+        display: block;
+        padding: 0 5px;
+        width: 160px;
+        height: 30px;
+        border-radius: 3px;
+        background-color: inherit;
+        border: 1px solid var(--line-co);
+      }
+    }
+  }
+
+  .createrepo__desc {
+    margin-top: 20px;
+    input {
+      color: inherit;
+      font-size: 12px;
+      display: block;
+      padding: 0 5px;
+      width: 317px;
+      height: 30px;
+      border-radius: 3px;
+      background-color: inherit;
+      border: 1px solid var(--line-co);
+    }
+  }
+
+  .createrepo__visibility {
+    margin-top: 20px;
+
+    label {
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        margin-right: 20px;
+        color: var(--white);
+    }
+
+    input[type="radio"] {
+        display: none;
+    }
+
+    input[type="radio"] + span {
+        position: relative;
+        padding-left: 25px; /* 커스텀 라디오 버튼 크기만큼 패딩 */
+    }
+
+    input[type="radio"] + span:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 2px solid var(--white);
+        background: transparent;
+    }
+
+    input[type="radio"]:checked + span:before {
+        background: var(--white);
+    }
+
+    input[type="radio"]:checked + span:after {
+        content: '';
+        position: absolute;
+        left: 4px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--primary-color); /* 선택된 상태의 색상 */
+    }
+  }
+}

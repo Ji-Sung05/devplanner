@@ -9,6 +9,10 @@
   background-color: var(--main-bg);
 }
 
+.container__inner {
+  display: flex;
+}
+
 #aside {
   width: 340px;
   height: calc(100vh - 73px);

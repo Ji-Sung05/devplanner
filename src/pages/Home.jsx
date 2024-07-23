@@ -1,27 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Header from '../components/layout/Header'
 import Aside from '../components/layout/Aside'
 import Main from '../components/layout/Main'
 import Landing from './Landing'
+import { useLocation } from 'react-router-dom'
 
 const Home = (props) => {
-  const [user, setUser] = useState(null);
-  
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const userParam = urlParams.get('user');
-
-    if (userParam) {
-      const userData = JSON.parse(decodeURIComponent(userParam));
-      setUser(userData);
-    }
-    
-  }, []);
-  
+  const {pathname} = useLocation()
   return (
     <div id='container'>
       <Header />
-      <div style={{display: 'flex'}}>
+      <div className={`container__inner ${pathname === 'work' ? 'hide' : ''}`}>
         <Aside />
         <Main>
           {props.children ? props.children : <Landing />}

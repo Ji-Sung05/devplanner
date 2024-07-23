@@ -28,7 +28,7 @@ const BottomHeader = () => {
             </Link>
           </li>
         ) : (
-          <li className={pathname === '/repositories' ? 'active' : ''}>
+          <li className={pathname === '/repositories' || pathname === '/create-repo' ? 'active' : ''}>
             <Link className='nav-link' to="/repositories">
               <MdComputer color='white' size={'20px'} />
               <span className='nav-text'>repositories</span>

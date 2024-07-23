@@ -6,7 +6,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 20px 0;
+    padding: 20px;
     gap: 20px;
     border-bottom: 1px solid var(--line-co);
 
@@ -16,18 +16,6 @@
       padding: 4px 10px;
       border-radius: 6px;
       background-color: inherit;
-    }
-
-    button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 7px;
-      width: 100px;
-      height: 28px;
-      border-radius: 5px;
-      color: white;
-      background-color: var(--newBtn-co);
     }
   }
 
@@ -53,6 +41,10 @@
           border-radius: 10px; 
           border: 1px solid var(--line-co);
           padding: 0 7px;
+        }
+
+        button {
+          background-color: inherit;
         }
       }
 
