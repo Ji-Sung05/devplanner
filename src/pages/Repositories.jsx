@@ -14,8 +14,6 @@ const Repositories = () => {
   const { data: repos, refetch } = useGetReposQuery(org, {
     skip: !org,
   });
-  console.log(repos)
-
   useEffect(() => {
     if (org) {
       refetch(); 
@@ -32,6 +30,10 @@ const Repositories = () => {
     navigate('/create-repo', { state: { org } });
   };
 
+  const handleRepoClick = (name, id) => {
+    navigate(`/work/${name}`, {state: { id }});
+  };
+
   return (
     <Home id='repositories'>
       <div className='repositories__inner'>
@@ -41,7 +43,7 @@ const Repositories = () => {
         </div>
         <div className='repositories__container'>
           {repos && repos.map((repo, key) => (
-            <article key={key} className='repositories'>
+            <article key={key} className='repositories' onClick={() => handleRepoClick(repo.name, repo.id)}>
               <div className='repositories__top'>
                 <h3>{repo.name}</h3>
                 <span>{repo.visibility}</span>

@@ -30,8 +30,15 @@ export const apiSlice = createApi({
           visibility
         }
       })
+    }),
+    deleteRepo: builder.mutation({
+      query: ({ org, repoName }) => 
+      ({
+        url: `/delete-repo/${org}/${repoName}`,
+        method: 'DELETE',
+      })
     })
   })
 })
 
-export const { useGetOrgsQuery, useGetReposQuery, useCreateRepoMutation } = apiSlice
+export const { useGetOrgsQuery, useGetReposQuery, useCreateRepoMutation, useDeleteRepoMutation } = apiSlice

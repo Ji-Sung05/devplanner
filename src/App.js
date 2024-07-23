@@ -23,7 +23,7 @@ function App() {
           <Route path='/repositories' element={<Repositories />} />
           <Route path='/create-repo' element={<CreateRepo />} />
           <Route path='/stars' element={<Stars />} />
-          <Route path='/work' element={<Work />} />
+          <Route path='/work/:repo' element={<Work />} />
         </Route>
         
         {/* 로그인한 사람은 갈 수 없는 경로 */}
