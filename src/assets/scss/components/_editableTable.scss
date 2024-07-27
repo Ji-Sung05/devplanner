@@ -1,0 +1,54 @@
+.table__body {
+  width: 100%;
+  border-collapse: collapse;
+
+  td{
+    border: 1px solid #ccc;
+    padding: 8px;
+    min-width: 140px;
+
+    &:nth-child(1) {
+      width: 40%;
+      border-left: none;
+    }
+
+    &:nth-child(2) {
+      width: 10%;
+    }
+
+    &:nth-child(3) {
+      width: 10%;
+    }
+
+    &:nth-child(4) {
+      width: 40%;
+      border-right: none;
+    }
+
+    div {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+    }
+
+    input {
+      background-color: inherit;
+      color: white;
+      width: 100%;
+    }
+
+    .input2 {
+      text-align: center;
+    }
+
+    .input3 {
+      text-align: center;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      background-color: white;
+      border-radius: 3px;
+    }
+  }
+}

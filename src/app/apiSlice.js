@@ -37,8 +37,15 @@ export const apiSlice = createApi({
         url: `/delete-repo/${org}/${repoName}`,
         method: 'DELETE',
       })
+    }),
+    cloneRepo: builder.mutation({
+      query: ({ orgName, repoName}) => 
+      ({
+        url: `/repo/${orgName}/${repoName}/clone-url`,
+        method: 'GET'
+      })
     })
   })
 })
 
-export const { useGetOrgsQuery, useGetReposQuery, useCreateRepoMutation, useDeleteRepoMutation } = apiSlice
+export const { useGetOrgsQuery, useGetReposQuery, useCreateRepoMutation, useDeleteRepoMutation, useCloneRepoMutation } = apiSlice

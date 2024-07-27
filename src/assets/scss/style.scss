@@ -15,6 +15,12 @@
 @import "section/organization";
 @import "section/repositories";
 @import "section/createrepo";
+@import "section/work";
+
+//components
+@import "components/editableTable";
+@import "components/todoSection";
+@import "components/tableHeader";
 
 //UI
 @import "UI/logoutBtn";

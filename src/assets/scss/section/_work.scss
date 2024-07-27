@@ -1,0 +1,29 @@
+.work__top {
+  width: 95%;
+  margin: 0 auto;
+  padding: 8px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  color: white;
+
+  select {
+    background-color: inherit;
+    color: white;
+    font-size: 12px;
+    padding: 0 5px;
+    
+    option {
+      color: black;
+    }
+  }
+}
+
+.work__inner {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
