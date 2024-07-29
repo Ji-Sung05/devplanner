@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getCookie } from "../cookies/Cookies";
+
 export const projectSlice = createApi({
   reducerPath: "project",
   baseQuery: fetchBaseQuery({
@@ -12,6 +13,7 @@ export const projectSlice = createApi({
       return headers;
     }
   }),
+  tagTypes: ["Repo"],
   endpoints: builder => ({
     createProject: builder.mutation({
       query: ({id}) => ({
@@ -23,14 +25,24 @@ export const projectSlice = createApi({
     addTask: builder.mutation({
       query: ({ projectId, task }) => ({
         url: `/project/${projectId}/tasks`,
-        method: 'PUT',
+        method: 'POST',
         body: task,
       }),
+      invalidatesTags: ['Repo'],
+    }),
+    updateTask: builder.mutation({
+      query: ({ projectId, taskId, task }) => ({
+        url: `/project/${projectId}/tasks/${taskId}`,
+        method: 'PUT',
+        body: task
+      }),
+      invalidatesTags: ['Repo'],
     }),
     fetchTasks: builder.query({
-      query: (projectId) => `/project/${projectId}/tasks`
+      query: (projectId) => `/project/${projectId}/tasks`,
+      providesTags: ['Repo']
     })
   })
 })
 
-export const { useCreateProjectMutation, useAddTaskMutation, useFetchTasksQuery } = projectSlice
+export const { useCreateProjectMutation, useAddTaskMutation, useUpdateTaskMutation, useFetchTasksQuery } = projectSlice
