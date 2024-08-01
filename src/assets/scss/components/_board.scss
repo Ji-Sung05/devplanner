@@ -1,0 +1,27 @@
+#boardcontainer {
+  width: 100%;
+  height: calc(100vh - 195px);
+  display: flex;
+  justify-content: space-around;
+  color: white;
+}
+
+.board__section {
+  .card__container {
+    width: 300px;
+    height: 661px;
+    border: 1px solid #fff;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .card__addwork {
+      padding: 0 5px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 5px;
+    }
+  }
+}

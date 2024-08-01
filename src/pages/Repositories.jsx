@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Home from './Home';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BsCopy } from "react-icons/bs";
@@ -17,8 +17,9 @@ const Repositories = () => {
   });
 
   const [cloneRepo] = useCloneRepoMutation();
-
   const [createProject] = useCreateProjectMutation();
+
+  const [filterText, setFilterText] = useState('');
 
   useEffect(() => {
     if (org) {
@@ -35,11 +36,11 @@ const Repositories = () => {
   const createClick = () => {
     navigate('/create-repo', { state: { org } });
   };
-
+  
   const handleRepoClick = async (name, id) => {
     setTimeout(async () => {
       await createProject({ id });
-      navigate(`/work/${name}`, { state: { id } });
+      navigate(`/work/${name}`, { state: { id, name } });
     }, 0);
   };
 
@@ -58,15 +59,25 @@ const Repositories = () => {
     });
   };
 
+  const handleFilterChange = (e) => {
+    setFilterText(e.target.value);
+  };
+
+  const filteredRepos = filterText
+    ? repos?.filter(repo =>
+        repo.name.toLowerCase().includes(filterText.toLowerCase())
+      )
+    : repos;
+
   return (
     <Home id='repositories'>
       <div className='repositories__inner'>
         <div className='repositories__header'>
-          <input type="text" placeholder='Find a repository...' />
+          <input type="text" placeholder='Find a repository...' onChange={handleFilterChange} />
           <CreateBtn onClick={createClick} />
         </div>
         <div className='repositories__container'>
-          {repos && repos.map((repo, key) => (
+          {filteredRepos && filteredRepos.map((repo, key) => (
             <article key={key} className='repositories' onClick={() => handleRepoClick(repo.name, repo.id)}>
               <div className='repositories__top'>
                 <h3>{repo.name}</h3>

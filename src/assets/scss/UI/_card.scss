@@ -1,0 +1,65 @@
+.card__inner {
+  padding: 15px;
+  width: 298px;
+  border: 1px solid #fff;
+  border-radius: 6px;
+  color: white;
+  margin: 0 auto;
+
+  .card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    div {
+      display: flex;
+      align-items: center;
+      
+      input {
+        flex: 1;
+        background-color: inherit;
+        color: white;
+        padding: 0 5px;
+        letter-spacing: 0.05rem;
+      }
+    }
+  }
+
+  .card__middle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+
+    input:nth-child(1) {
+      width: 80px;
+      background-color: inherit;
+      color: white;
+      padding: 0 5px;
+      letter-spacing: 0.05rem;
+    }
+
+    input:nth-child(2) {
+      background-color: inherit;
+      color: white;
+      padding: 0 5px;
+      letter-spacing: 0.05rem;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      background-color: white;
+      border-radius: 3px;
+    }
+  }
+
+  .card__bottom {
+    input {
+      width: 100%;
+      background-color: inherit;
+      color: white;
+      padding: 0 5px;
+      letter-spacing: 0.05rem;
+    }
+  }
+}

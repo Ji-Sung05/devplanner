@@ -9,7 +9,7 @@ const Login = () => {
   return (
     <section id='login__container'>
       <div className='login__inner'>
-        <h1>로그인</h1>
+        <h1 className='login__h1'>로그인</h1>
         <form onSubmit={loginForm}>
           <div className='login__button'>
             <IoLogoGithub color='white' />
