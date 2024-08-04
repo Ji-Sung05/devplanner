@@ -4,19 +4,20 @@ import { useFetchTasksQuery, useAddTaskMutation, useUpdateTaskMutation } from '.
 //pages
 import Home from './Home';
 //components
-import TodoSection from '../components/TodoSection';
 import TableHeader from '../components/TableHeader';
 import BoardContainer from '../components/BoardContainer';
+import ListContainer from './../components/ListContainer';
+import Commit from '../components/Commit';
 
 export const actionContext = createContext()
 
 const Work = () => {
   const location = useLocation();
-  const { id, name } = location.state;
+  const { id, name, org } = location.state;
   const [rows, setRows] = useState([]);
   const [currentId, setCurrentId] = useState(1);
   const [category, setCategory] = useState('');
-
+  
   const plusCurrentId = () => {
     setCurrentId(currentId + 1)
   }
@@ -127,7 +128,7 @@ const Work = () => {
         }
       }
     }),
-    [rows, id]
+    [rows, id, addTask, updateTask]
   )
 
   return (
@@ -138,23 +139,21 @@ const Work = () => {
           <option value="">목록 ▼</option>
           <option value="list">list</option>
           <option value="board">board</option>
-          <option value="chat">chat</option>
+          <option value="commit">commit</option>
         </select>
       </div>
-      <actionContext.Provider className='work__inner' value={actions}>
-        <TableHeader doneLength={doneLength} category={category} />
-        {category === '' || category === 'list' ? (
-          <div>
-            {/* <TodoSection data={todo} title={'할 일'} $addWork={true} handleAddWork={handleAddWork} handleEditCell={handleEditCell} updateTodoHandler={updateTodoHandler} AddTodoHandler={AddTodoHandler} updateStatusHandler={updateStatusHandler} />
-            <TodoSection data={inprogress} title={'진행중'} $addWork={false} handleAddWork={handleAddWork} handleEditCell={handleEditCell} updateTodoHandler={updateTodoHandler} AddTodoHandler={AddTodoHandler} updateStatusHandler={updateStatusHandler} />
-            <TodoSection data={done} title={'작업 완료'} $addWork={false} handleAddWork={handleAddWork} handleEditCell={handleEditCell} updateTodoHandler={updateTodoHandler} AddTodoHandler={AddTodoHandler} updateStatusHandler={updateStatusHandler} /> */}
-          </div>
-        ) : category === 'board' ? (
-          <BoardContainer todo={todo} inprogress={inprogress} done={done} addWork={handleAddWork} />
-        ) : category === 'chat' ?  (
-          <div>1</div>
-        ) : null}
-      </actionContext.Provider>
+      <div className='work__inner'>
+        <actionContext.Provider value={actions}>
+          <TableHeader doneLength={doneLength} category={category} />
+          {category === '' || category === 'list' ? (
+            <ListContainer todo={todo} inprogress={inprogress} done={done} addWork={handleAddWork} />
+          ) : category === 'board' ? (
+            <BoardContainer todo={todo} inprogress={inprogress} done={done} addWork={handleAddWork} />
+          ) : category === 'commit' ?  (
+            <Commit repoName={name} orgName={org} />
+          ) : null}
+        </actionContext.Provider>
+      </div>
     </Home>
   );
 };

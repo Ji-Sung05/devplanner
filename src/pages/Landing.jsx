@@ -1,10 +1,16 @@
 import React from 'react'
-
+import TodoContainer from '../components/TodoContainer'
+import CalendarCard from '../components/CalendarCard'
 
 const Landing = () => {
   
   return (
-    <div>Landing</div>
+    <section id='landing'>
+      <div className='landing__inner'>
+        <TodoContainer />
+        <CalendarCard />
+      </div>
+    </section>
   )
 }
 

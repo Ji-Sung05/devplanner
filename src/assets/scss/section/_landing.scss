@@ -1,0 +1,65 @@
+.landing__inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  margin-top: 100px;
+}
+
+.todocontainer__inner {
+  width: 500px;
+  border: 1px solid var(--line-co);
+  background-color: var(--inner-co);
+  border-radius: 6px;
+  padding: 10px;
+  color: white;
+
+  .todo__add {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    margin-bottom: 5px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    td {
+      border: 1px solid #ccc;
+      padding: 3px 10px;
+
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 5px;
+        width: 100%;
+        
+        input {
+          width: 100%;
+          background-color: inherit;
+          color: white;
+          padding: 0 5px;
+        }
+      }
+
+      &:nth-child(1) {
+        border-left: none;
+        border-right: none;
+      }
+
+      &:nth-child(2) {
+        width: 30%;
+        border-left: none;
+        border-right: none;
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+          background-color: white;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}

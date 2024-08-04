@@ -16,12 +16,14 @@
 @import "section/repositories";
 @import "section/createrepo";
 @import "section/work";
+@import "section/landing";
 
 //components
 @import "components/editableTable";
-@import "components/todoSection";
+@import "components/listContainer";
 @import "components/tableHeader";
 @import "components/board";
+@import "components/calendar";
 
 //UI
 @import "UI/logoutBtn";

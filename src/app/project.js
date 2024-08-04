@@ -41,8 +41,11 @@ export const projectSlice = createApi({
     fetchTasks: builder.query({
       query: (projectId) => `/project/${projectId}/tasks`,
       providesTags: ['Repo']
-    })
+    }),
+    fetchCommits: builder.query({
+      query: ({ orgName, repoName }) => `/commits/${orgName}/${repoName}`,
+    }),
   })
 })
 
-export const { useCreateProjectMutation, useAddTaskMutation, useUpdateTaskMutation, useFetchTasksQuery } = projectSlice
+export const { useCreateProjectMutation, useAddTaskMutation, useUpdateTaskMutation, useFetchTasksQuery, useFetchCommitsQuery } = projectSlice

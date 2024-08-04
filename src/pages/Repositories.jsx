@@ -11,7 +11,7 @@ const Repositories = () => {
   const navigate = useNavigate();
 
   const org = location.state?.orgs
-
+  
   const { data: repos, refetch } = useGetReposQuery(org, {
     skip: !org,
   });
@@ -37,13 +37,13 @@ const Repositories = () => {
     navigate('/create-repo', { state: { org } });
   };
   
-  const handleRepoClick = async (name, id) => {
+  const handleRepoClick = async (name, id, org) => {
     setTimeout(async () => {
       await createProject({ id });
-      navigate(`/work/${name}`, { state: { id, name } });
+      navigate(`/work/${name}`, { state: { id, name, org } });
     }, 0);
   };
-
+  
   const handleCloneClick = (orgName, repoName, e) => {
     e.stopPropagation();
     cloneRepo({ orgName, repoName }).then(response => {
@@ -78,7 +78,7 @@ const Repositories = () => {
         </div>
         <div className='repositories__container'>
           {filteredRepos && filteredRepos.map((repo, key) => (
-            <article key={key} className='repositories' onClick={() => handleRepoClick(repo.name, repo.id)}>
+            <article key={key} className='repositories' onClick={() => handleRepoClick(repo.name, repo.id, org)}>
               <div className='repositories__top'>
                 <h3>{repo.name}</h3>
                 <span>{repo.visibility}</span>

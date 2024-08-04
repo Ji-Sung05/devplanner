@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { actionContext } from '../pages/Work';
 import { FaRegCheckCircle } from "react-icons/fa";
 
-const EditableTable = ({ rows, onEditCell, onAdd, onUpdate, onStatus }) => {
-
+const EditableTable = ({ rows }) => {
+  const { edit, add, update, updateStatus } = useContext(actionContext);
   return (
     <table className='table__body'>
       <tbody>
@@ -10,12 +11,12 @@ const EditableTable = ({ rows, onEditCell, onAdd, onUpdate, onStatus }) => {
           <tr key={row.taskId}>
             <td>
               <div>
-                <span onClick={() => onUpdate(row.taskId)} className='update'>:</span>
-                <FaRegCheckCircle color='white' onClick={() => onAdd(row.taskId)} />
+                <span onClick={() => update(row.taskId)} className='update'>:</span>
+                <FaRegCheckCircle color='white' onClick={() => add(row.taskId)} />
                 <input
                   type="text"
                   value={row.todo}
-                  onChange={(e) => onEditCell(row.taskId, 'todo', e.target.value)}
+                  onChange={(e) => edit(row.taskId, 'todo', e.target.value)}
                 />
               </div>
             </td>
@@ -24,7 +25,7 @@ const EditableTable = ({ rows, onEditCell, onAdd, onUpdate, onStatus }) => {
                 type="text"
                 className='input2'
                 value={row.worker}
-                onChange={(e) => onEditCell(row.taskId, 'worker', e.target.value)}
+                onChange={(e) => edit(row.taskId, 'worker', e.target.value)}
               />
             </td>
             <td>
@@ -32,7 +33,7 @@ const EditableTable = ({ rows, onEditCell, onAdd, onUpdate, onStatus }) => {
                 type="date"
                 className='input3'
                 value={row.date}
-                onChange={(e) => onEditCell(row.taskId, 'date', e.target.value)}
+                onChange={(e) => edit(row.taskId, 'date', e.target.value)}
               />
             </td>
             <td>
@@ -40,9 +41,9 @@ const EditableTable = ({ rows, onEditCell, onAdd, onUpdate, onStatus }) => {
                 <input
                   type="text"
                   value={row.content}
-                  onChange={(e) => onEditCell(row.taskId, 'content', e.target.value)}
+                  onChange={(e) => edit(row.taskId, 'content', e.target.value)}
                 />
-                <span className='move' onClick={() => onStatus(row.taskId, row.status)}>⇩</span>
+                <span className='move' onClick={() => updateStatus(row.taskId, row.status)}>⇩</span>
               </div>
             </td>
           </tr>

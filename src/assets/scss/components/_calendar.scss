@@ -1,0 +1,85 @@
+.calendarcard {
+  width: 530px;
+  height: 380px;
+  background-color: #1a1a1a; /* 어두운 배경색 */
+  color: #fff; /* 밝은 글자색 */
+
+  .calendar {
+    color: white;
+
+    .rbc-toolbar {
+      button {
+        color: white;
+      }
+    }
+
+    .rbc-off-range-bg {
+      background-color: #333;
+    }
+
+    .rbc-today {
+      background-color: #c4c2c2;
+    }
+  }
+}
+
+.ReactModal__Overlay {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;  
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.75); /* 어두운 반투명 배경 */
+}
+
+.ReactModal__Content {
+  position: relative;
+  background-color: #333; /* 어두운 모달 배경색 */
+  color: #fff; /* 밝은 모달 글자색 */
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  animation: fadeIn 0.3s ease-in-out;
+  margin: 0 10px;
+}
+
+.ReactModal__Content h2 {
+  text-align: center;
+}
+
+.ReactModal__Content .modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.ReactModal__Content .modal-body input {
+  margin-left: 8px;
+  background-color: #555; /* 어두운 색상 */
+  color: #fff; /* 밝은 글자색 */
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background-color: white;
+  border-radius: 3px;
+}
+
+.ReactModal__Content .modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+  button {
+    padding: 3px;
+    border-radius: 3px;
+  }
+}
