@@ -28,3 +28,10 @@
   flex-direction: column;
   gap: 30px;
 }
+
+.no-gap {
+  gap: 0;
+  padding: 10px;
+  color: white;
+  overflow-y: auto;
+}

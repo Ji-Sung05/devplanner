@@ -1,0 +1,27 @@
+#commit {
+  .commit__inner {
+    h3 {
+      padding-left: 10px;
+    }
+  }
+}
+
+#commitCard {
+  width: 100%;
+  border: 1px solid #fff;
+  color: white;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 6px;
+
+  .commitCard__bottom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .bottom__img {
+      width: 20px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+  }
+}

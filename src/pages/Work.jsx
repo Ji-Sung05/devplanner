@@ -142,7 +142,7 @@ const Work = () => {
           <option value="commit">commit</option>
         </select>
       </div>
-      <div className='work__inner'>
+      <div className={`work__inner ${category === 'commit' ? 'no-gap' : ''}`}>
         <actionContext.Provider value={actions}>
           <TableHeader doneLength={doneLength} category={category} />
           {category === '' || category === 'list' ? (
