@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getCookie } from "../cookies/Cookies";
-
+console.log('123', getCookie('token'))
 export const projectSlice = createApi({
   reducerPath: "project",
   baseQuery: fetchBaseQuery({
