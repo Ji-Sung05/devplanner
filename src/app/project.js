@@ -11,20 +11,21 @@ export const projectSlice = createApi({
         headers.set('authorization', `Bearer ${token}`);
       }
       return headers;
-    }
+    },
+    credentials: 'include'
   }),
   tagTypes: ["Repo"],
   endpoints: builder => ({
     createProject: builder.mutation({
       query: ({id}) => ({
-        url: `/project`,
+        url: process.env.REACT_APP_PROJECT,
         method: 'POST',
         body: {id}
       })
     }),
     addTask: builder.mutation({
       query: ({ projectId, task }) => ({
-        url: `/project/${projectId}/tasks`,
+        url: `${process.env.REACT_APP_PROJECT}/${projectId}/tasks`,
         method: 'POST',
         body: task,
       }),
@@ -32,18 +33,18 @@ export const projectSlice = createApi({
     }),
     updateTask: builder.mutation({
       query: ({ projectId, taskId, task }) => ({
-        url: `/project/${projectId}/tasks/${taskId}`,
+        url: `${process.env.REACT_APP_PROJECT}/${projectId}/tasks/${taskId}`,
         method: 'PUT',
         body: task
       }),
       invalidatesTags: ['Repo'],
     }),
     fetchTasks: builder.query({
-      query: (projectId) => `/project/${projectId}/tasks`,
+      query: (projectId) => `${process.env.REACT_APP_PROJECT}/${projectId}/tasks`,
       providesTags: ['Repo']
     }),
     fetchCommits: builder.query({
-      query: ({ orgName, repoName }) => `/commits/${orgName}/${repoName}`,
+      query: ({ orgName, repoName }) => `${process.env.REACT_APP_COMMIT}/${orgName}/${repoName}`,
     }),
   })
 })

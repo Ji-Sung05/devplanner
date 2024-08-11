@@ -10,11 +10,12 @@ export const userSlice = createApi({
         headers.set('authorization', `Bearer ${token}`);
       }
       return headers;
-    }
+    },
+    credentials: 'include'
   }),
   endpoints: builder => ({
     getAuth: builder.query({
-      query: () => "/user"
+      query: () => process.env.REACT_APP_USER
     }),
   })
 })

@@ -11,25 +11,26 @@ export const todoSlice = createApi({
         headers.set('authorization', `Bearer ${token}`);
       }
       return headers;
-    }
+    },
+    credentials: 'include'
   }),
   tagTypes: ["Todo"],
   endpoints: builder => ({
     createTodo: builder.mutation({
       query: ({ todo, startDate, endDate }) => ({
-        url: `/todos`,
+        url: process.env.REACT_APP_TODO,
         method: 'POST',
         body: { todo, startDate, endDate }
       }),
       invalidatesTags: ["Todo"],
     }),
     fetchTodos: builder.query({
-      query: () => `/todos`,
+      query: () => process.env.REACT_APP_TODO,
       providesTags: ["Todo"]
     }),
     deleteTodo: builder.mutation({
       query: (todoId) => ({
-        url: `/todos/${todoId}`,
+        url: `${process.env.REACT_APP_TODO}/${todoId}`,
         method: 'DELETE',
       }),
       invalidatesTags: ["Todo"]
