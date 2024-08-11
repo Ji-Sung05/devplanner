@@ -15,7 +15,7 @@ export const userSlice = createApi({
   }),
   endpoints: builder => ({
     getAuth: builder.query({
-      query: () => process.env.REACT_APP_USER
+      query: () => "/user"
     }),
   })
 })

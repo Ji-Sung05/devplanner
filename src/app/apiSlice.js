@@ -15,14 +15,14 @@ export const apiSlice = createApi({
   }),
   endpoints: builder => ({
     getOrgs: builder.query({
-      query: () => process.env.REACT_APP_ORGS
+      query: () => "/organizations"
     }),
     getRepos: builder.query({
-      query: (orgName) => `${process.env.REACT_APP_REPO}/${orgName}`
+      query: (orgName) => `/repos/${orgName}`
     }),
     createRepo: builder.mutation({
       query: ({ orgName, repoName, description, visibility }) => ({
-        url: process.env.REACT_APP_CREATE_REPO,
+        url: `/create-repo`,
         method: 'POST',
         body: {
           orgName,
@@ -35,14 +35,14 @@ export const apiSlice = createApi({
     deleteRepo: builder.mutation({
       query: ({ org, repoName }) => 
       ({
-        url: `${process.env.REACT_APP_DELETE_REPO}/${org}/${repoName}`,
+        url: `/delete-repo/${org}/${repoName}`,
         method: 'DELETE',
       })
     }),
     cloneRepo: builder.mutation({
       query: ({ orgName, repoName}) => 
       ({
-        url: `${process.env.REACT_APP_REPO}/${orgName}/${repoName}/clone-url`,
+        url: `/repo/${orgName}/${repoName}/clone-url`,
         method: 'GET'
       })
     })

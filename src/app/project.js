@@ -18,14 +18,14 @@ export const projectSlice = createApi({
   endpoints: builder => ({
     createProject: builder.mutation({
       query: ({id}) => ({
-        url: process.env.REACT_APP_PROJECT,
+        url: `/project`,
         method: 'POST',
         body: {id}
       })
     }),
     addTask: builder.mutation({
       query: ({ projectId, task }) => ({
-        url: `${process.env.REACT_APP_PROJECT}/${projectId}/tasks`,
+        url: `/project/${projectId}/tasks`,
         method: 'POST',
         body: task,
       }),
@@ -33,18 +33,18 @@ export const projectSlice = createApi({
     }),
     updateTask: builder.mutation({
       query: ({ projectId, taskId, task }) => ({
-        url: `${process.env.REACT_APP_PROJECT}/${projectId}/tasks/${taskId}`,
+        url: `/project/${projectId}/tasks/${taskId}`,
         method: 'PUT',
         body: task
       }),
       invalidatesTags: ['Repo'],
     }),
     fetchTasks: builder.query({
-      query: (projectId) => `${process.env.REACT_APP_PROJECT}/${projectId}/tasks`,
+      query: (projectId) => `/project/${projectId}/tasks`,
       providesTags: ['Repo']
     }),
     fetchCommits: builder.query({
-      query: ({ orgName, repoName }) => `${process.env.REACT_APP_COMMIT}/${orgName}/${repoName}`,
+      query: ({ orgName, repoName }) => `/commits/${orgName}/${repoName}`,
     }),
   })
 })

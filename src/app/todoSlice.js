@@ -18,19 +18,19 @@ export const todoSlice = createApi({
   endpoints: builder => ({
     createTodo: builder.mutation({
       query: ({ todo, startDate, endDate }) => ({
-        url: process.env.REACT_APP_TODO,
+        url: `/todos`,
         method: 'POST',
         body: { todo, startDate, endDate }
       }),
       invalidatesTags: ["Todo"],
     }),
     fetchTodos: builder.query({
-      query: () => process.env.REACT_APP_TODO,
+      query: () => `/todos`,
       providesTags: ["Todo"]
     }),
     deleteTodo: builder.mutation({
       query: (todoId) => ({
-        url: `${process.env.REACT_APP_TODO}/${todoId}`,
+        url: `/todos/${todoId}`,
         method: 'DELETE',
       }),
       invalidatesTags: ["Todo"]
