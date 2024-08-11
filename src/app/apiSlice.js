@@ -6,7 +6,6 @@ export const apiSlice = createApi({
     baseUrl: process.env.REACT_APP_BASE_URL,
     prepareHeaders: (headers) => {
       const token = getCookie('token');
-      console.log('token', token)
       if(token) {
         headers.set('authorization', `Bearer ${token}`);
       }
