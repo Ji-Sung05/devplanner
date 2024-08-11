@@ -12,7 +12,6 @@ export const todoSlice = createApi({
       }
       return headers;
     },
-    credentials: 'include'
   }),
   tagTypes: ["Todo"],
   endpoints: builder => ({

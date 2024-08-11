@@ -11,7 +11,6 @@ export const userSlice = createApi({
       }
       return headers;
     },
-    credentials: 'include'
   }),
   endpoints: builder => ({
     getAuth: builder.query({

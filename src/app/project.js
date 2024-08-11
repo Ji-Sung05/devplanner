@@ -12,7 +12,6 @@ export const projectSlice = createApi({
       }
       return headers;
     },
-    credentials: 'include'
   }),
   tagTypes: ["Repo"],
   endpoints: builder => ({

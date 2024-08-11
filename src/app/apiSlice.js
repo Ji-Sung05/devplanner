@@ -11,7 +11,6 @@ export const apiSlice = createApi({
       }
       return headers;
     },
-    credentials: 'include'
   }),
   endpoints: builder => ({
     getOrgs: builder.query({
