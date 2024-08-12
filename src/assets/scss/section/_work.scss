@@ -27,6 +27,10 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+
+  @media screen and (max-width: 1320px) {
+    gap: 0;
+  }
 }
 
 .no-gap {

@@ -4,6 +4,10 @@
   display: flex;
   justify-content: space-around;
   color: white;
+
+  @media screen and (max-width: 1320px) {
+    flex-direction: column;
+  }
 }
 
 .board__section {
@@ -22,6 +26,14 @@
       align-items: center;
       justify-content: flex-start;
       gap: 5px;
+    }
+
+    @media screen and (max-width: 1320px) {
+      width: 100%;
+      height: 110px;
+
+      .card__addwork {
+      }
     }
   }
 }

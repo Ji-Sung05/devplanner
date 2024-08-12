@@ -13,4 +13,8 @@
   &:hover {
     background-color: var(--inner-dark-co);
   }
+
+  @media screen and (max-width: 1000px) {
+    margin: 0;
+  }
 }

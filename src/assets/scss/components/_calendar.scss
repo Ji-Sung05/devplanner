@@ -1,5 +1,5 @@
 .calendarcard {
-  width: 530px;
+  width: 45%;
   height: 380px;
   background-color: #1a1a1a; /* 어두운 배경색 */
   color: #fff; /* 밝은 글자색 */
@@ -20,6 +20,11 @@
     .rbc-today {
       background-color: #c4c2c2;
     }
+  }
+
+  @media screen and (max-width: 1320px) {
+    width: 100%;
+    order: 0;
   }
 }
 
