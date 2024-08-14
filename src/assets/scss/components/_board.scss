@@ -4,10 +4,6 @@
   display: flex;
   justify-content: space-around;
   color: white;
-
-  @media screen and (max-width: 1320px) {
-    flex-direction: column;
-  }
 }
 
 .board__section {
@@ -24,14 +20,6 @@
       margin-top: 15px;
       text-align: center;
       cursor: pointer;
-    }
-
-    @media screen and (max-width: 1320px) {
-      width: 100%;
-      height: 110px;
-
-      .card__addwork {
-      }
     }
   }
 }

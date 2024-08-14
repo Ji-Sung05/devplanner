@@ -49,3 +49,15 @@
     }
   }
 }
+
+.work {
+  #aside {
+    display: none;
+  }
+
+  #main {
+    margin-top: 73px;
+    width: 100%;
+    height: calc(100vh - 73px);
+  }
+}
