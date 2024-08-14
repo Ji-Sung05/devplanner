@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { useGetAuthQuery, useLogoutMutation } from '../app/usersSlice';
+import { useGetAuthQuery } from '../app/usersSlice';
 import { getCookie, removeCookie } from '../cookies/Cookies';
 
 export const AuthContext = createContext();
@@ -7,7 +7,6 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const { isSuccess } = useGetAuthQuery();
   const [isAuth, setIsAuth] = useState(isSuccess);
-  const [logoutRequest] = useLogoutMutation()
   let token = getCookie('token');
 
   useEffect(() => {
@@ -18,14 +17,9 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token, isSuccess]);
 
-  const logout = async () => {
-    try {
-      await logoutRequest().unwrap()
-      removeCookie('token')
-      setIsAuth(false)
-    } catch(error) {
-      console.error('logout failed: ', error)
-    }
+  const logout = () => {
+    removeCookie('token');
+    setIsAuth(false);
   };
 
   return (
