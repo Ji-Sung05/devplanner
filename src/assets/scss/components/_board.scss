@@ -21,11 +21,9 @@
     gap: 15px;
 
     .card__addwork {
-      padding: 0 5px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 5px;
+      margin-top: 15px;
+      text-align: center;
+      cursor: pointer;
     }
 
     @media screen and (max-width: 1320px) {

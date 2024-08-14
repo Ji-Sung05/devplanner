@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from './UI/Card'
-import { FaPlus } from "react-icons/fa6";
+import { GoPlusCircle } from "react-icons/go";
 
 
 const BoardSection = ({title, data, $addWork, plus}) => {
@@ -16,8 +16,7 @@ const BoardSection = ({title, data, $addWork, plus}) => {
         ) : null}
         {$addWork ? (
         <div className='card__addwork' onClick={plus ? plus : null}>
-          <FaPlus />
-          <span>작업 추가</span>
+          <GoPlusCircle size={28} />
         </div>
       ) : null}
       </div>
