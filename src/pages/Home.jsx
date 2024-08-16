@@ -11,12 +11,12 @@ const Home = (props) => {
   return (
     <div id='container'>
       <Header />
-        <div className={`container__inner ${isWorkPage ? 'work' : ''}`}>
-          <Aside />
-          <Main>
-            {props.children ? props.children : <Landing />}
-          </Main>
-        </div>
+      <div className={`container__inner ${isWorkPage ? 'work' : ''}`}>
+        <Aside />
+        <Main>
+          {props.children ? props.children : <Landing />}
+        </Main>
+      </div>
     </div>
   )
 }
