@@ -8,40 +8,10 @@
     min-width: 140px;
     position: relative;
 
-    .update {
-      display: none;
-    }
-
-    &:hover .update {
-      display: block;
-      font-size: 18px;
-      position: absolute;
-      right: 97.5%;
-      top: 10px;
-      margin-left: 5px;
-      color: white;
-      cursor: pointer;
-    }
-
-    .move {
-      display: none;
-    }
-
-    &:hover .move {
-      display: block;
-      font-size: 18px;
-      position: absolute;
-      left: 95%;
-      top: 10px;
-      margin-left: 5px;
-      color: white;
-      cursor: pointer;
-    }
-
     &:nth-child(1) {
       width: 40%;
       border-left: none;
-      padding: 8px 20px;
+      padding: 8px;
     }
 
     &:nth-child(2) {
@@ -62,6 +32,23 @@
       justify-content: flex-start;
       align-items: center;
       gap: 10px;
+
+      .option {
+        position: relative;
+
+        ul {
+          padding: 5px;
+          position: absolute;
+          top: -15px;
+          left: 10px;
+          width: 75px;
+          height: 80px;
+          background-color: var(--inner-co);
+          border: 1px solid var(--line-co);
+          border-radius: 3px;
+          z-index: 9999;
+        }
+      }
     }
 
     input {

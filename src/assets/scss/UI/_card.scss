@@ -9,8 +9,26 @@
   .card__top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-bottom: 10px;
+    gap: 8px;  
+
+    .option {
+      position: relative;
+
+      ul {
+        padding: 5px;
+        position: absolute;
+        top: -15px;
+        left: 10px;
+        width: 75px;
+        height: 80px;
+        background-color: var(--inner-co);
+        border: 1px solid var(--line-co);
+        border-radius: 3px;
+        z-index: 9999;
+      }
+    }
 
     div {
       display: flex;
@@ -20,7 +38,7 @@
         width: 92%;
         background-color: inherit;
         color: white;
-        padding: 0 5px;
+        padding: 0 2px;
         letter-spacing: 0.05rem;
       }
     }
