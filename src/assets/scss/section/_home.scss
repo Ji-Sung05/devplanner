@@ -25,6 +25,7 @@
     height: calc(100vh - 73px);
     position: fixed;
     top: 73px;
+    left: 340px;
     background-color: var(--main-bg);
     z-index: 9999;
     overflow-y: auto;
@@ -45,6 +46,7 @@
     #main {
       width: 100%;
       height: calc(100vh - 243px);
+      left: 0;
       margin-top: 0;
       border-top: 1px solid var(--line-co);
     }
@@ -57,7 +59,7 @@
   }
 
   #main {
-    margin-top: 73px;
+    top: 73px;
     width: 100%;
     height: calc(100vh - 73px);
   }
