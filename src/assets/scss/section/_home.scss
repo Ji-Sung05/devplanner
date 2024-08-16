@@ -11,21 +11,17 @@
 
 .container__inner {
   display: flex;
+  height: calc(100vh - 73px);
+  position: fixed;
+  top: 73px;
   #aside {
     width: 340px;
-    height: calc(100vh - 73px);
-    position: fixed;
-    top: 73px;
     z-index: 9999;
     background-color: var(--main-bg);
   }
 
   #main {
     width: calc(100vw - 340px);
-    height: calc(100vh - 73px);
-    position: fixed;
-    top: 73px;
-    left: 340px;
     background-color: var(--main-bg);
     z-index: 9999;
     overflow-y: auto;
@@ -37,7 +33,7 @@
 
   @media screen and (max-width: 1000px) {
     display: block;
-
+    width: 100%;
     #aside {
       width: 100%;
       height: 170px;
@@ -46,20 +42,18 @@
     #main {
       width: 100%;
       height: calc(100vh - 243px);
-      left: 0;
-      margin-top: 0;
       border-top: 1px solid var(--line-co);
     }
   }
 }
 
 .work {
+  width: 100%;
   #aside {
     display: none;
   }
 
   #main {
-    top: 73px;
     width: 100%;
     height: calc(100vh - 73px);
   }
