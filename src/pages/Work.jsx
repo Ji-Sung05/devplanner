@@ -1,6 +1,6 @@
 import React, { useEffect, useState, createContext, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useFetchTasksQuery, useAddTaskMutation, useUpdateTaskMutation } from '../app/project';
+import { useFetchTasksQuery, useAddTaskMutation, useUpdateTaskMutation, useDeleteTasksMutation } from '../app/project';
 //pages
 import Home from './Home';
 //components
@@ -27,6 +27,7 @@ const Work = () => {
   })
   const [addTask] = useAddTaskMutation();
   const [updateTask] = useUpdateTaskMutation();
+  const [deleteTask] = useDeleteTasksMutation();
 
   useEffect(() => {
     if(tasks && tasks.length > 0) {
@@ -126,9 +127,16 @@ const Work = () => {
         } catch (error) {
           console.error('Error saving task:', error);
         }
+      },
+      deleteTask: async (rowId) => {
+        try {
+          await deleteTask({ projectId: id, taskId: rowId }).unwrap()
+        } catch(error) {
+          console.error('Error delete task:', error)
+        }
       }
     }),
-    [rows, id, addTask, updateTask]
+    [rows, id, addTask, updateTask, deleteTask]
   )
 
   return (

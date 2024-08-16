@@ -42,10 +42,17 @@ export const projectSlice = createApi({
       query: (projectId) => `/project/${projectId}/tasks`,
       providesTags: ['Repo']
     }),
+    deleteTasks: builder.mutation({
+      query: ({ projectId, taskId }) => ({
+        url: `/project/${projectId}/tasks/${taskId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Repo'],
+    }),
     fetchCommits: builder.query({
       query: ({ orgName, repoName }) => `/commits/${orgName}/${repoName}`,
     }),
   })
 })
 
-export const { useCreateProjectMutation, useAddTaskMutation, useUpdateTaskMutation, useFetchTasksQuery, useFetchCommitsQuery } = projectSlice
+export const { useCreateProjectMutation, useAddTaskMutation, useUpdateTaskMutation, useFetchTasksQuery, useFetchCommitsQuery, useDeleteTasksMutation } = projectSlice

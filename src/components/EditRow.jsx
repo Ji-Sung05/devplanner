@@ -3,7 +3,7 @@ import { actionContext } from '../pages/Work';
 import { FaRegCheckCircle } from "react-icons/fa";
 
 const EditRow = ({ row }) => {
-  const { edit, add, update, updateStatus } = useContext(actionContext);
+  const { edit, add, update, updateStatus, deleteTask } = useContext(actionContext);
   const [isOption, setIsOption] = useState(false)
 
   const toggleOption = () => {
@@ -20,8 +20,8 @@ const EditRow = ({ row }) => {
               isOption && (
                 <ul>
                   <li value="update" onClick={() => update(row.taskId)}>수정하기</li>
-                  <li value="delete" onClick={() => updateStatus(row.taskId, row.status)}>삭제하기</li>
-                  <li value="move">완료</li>
+                  <li value="delete" onClick={() => deleteTask(row.taskId)}>삭제하기</li>
+                  <li value="move" onClick={() => updateStatus(row.taskId, row.status)}>완료</li>
                 </ul>
               )
             }
