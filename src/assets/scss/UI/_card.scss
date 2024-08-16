@@ -62,4 +62,8 @@
       letter-spacing: 0.05rem;
     }
   }
+
+  @media screen and (max-width: 1320px) {
+    width: 268px;
+  }
 }

@@ -2,9 +2,10 @@ import React from 'react'
 import { IoLogoGithub } from "react-icons/io";
 
 const Login = () => {
+  const baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:4000'
   const loginForm = (e) => {
     e.preventDefault();
-    window.location.href = `${process.env.REACT_APP_BASE_URL}/auth`;
+    window.location.href = `${baseUrl}/auth`;
   }
   return (
     <section id='login__container'>
