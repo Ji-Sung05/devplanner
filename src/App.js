@@ -9,6 +9,7 @@ import Organization from './pages/Organization';
 import Repositories from './pages/Repositories';
 import CreateRepo from './pages/CreateRepo';
 import Work from './pages/Work';
+import Manual from './pages/Manual';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route path='/repositories' element={<Repositories />} />
           <Route path='/create-repo' element={<CreateRepo />} />
           <Route path='/work/:repo' element={<Work />} />
+          <Route path='/manual' element={<Manual />} />
         </Route>
         
         {/* 로그인한 사람은 갈 수 없는 경로 */}
