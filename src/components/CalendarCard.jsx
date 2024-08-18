@@ -5,18 +5,17 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import Modal from 'react-modal';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
-import { useCreateTodoMutation, useFetchTodosQuery } from '../app/todoSlice';
+import { useCreateTodoMutation } from '../app/todoSlice';
 
 //momentLocalizer: moment.js를 캘리더의 날짜 형식에 맞게 로컬라이즈하는 역할 
 const localizer = momentLocalizer(moment);
 
-const CalendarCard = () => {
+const CalendarCard = ({ tasks }) => {
   //캘린더에 표시될 이벤트 목록
   const [events, setEvents] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   //새로 추가할 이벤트의 제목과 날짜 범위
   const [newEvent, setNewEvent] = useState({ title: '', start: '', end: '' });
-  const { data: tasks = [] } = useFetchTodosQuery();
   const [createTodo] = useCreateTodoMutation();
 
   //api 에서 가져온 데이터를 캘린더에 맞는 형식으로 변환하여 events 상태를 업데이트
@@ -27,10 +26,23 @@ const CalendarCard = () => {
         title: task.todo,
         start: new Date(task.startDate),
         end: new Date(task.endDate),
+        bgColor: task.bgColor || getRandomColor(),
       }));
       setEvents(formattedTasks);
+    } else {
+      // tasks가 빈 배열일 때 events도 빈 배열로 설정
+      setEvents([]);
     }
   }, [tasks]);
+
+  const getRandomColor = () => {
+    const letters = '123456789ABCDEF'
+    let color = '#'
+    for(let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)]
+    }
+    return color
+  }
 
   const handleSelectSlot = ({ start, end }) => {
     setNewEvent({ title: '', start, end });
@@ -39,12 +51,13 @@ const CalendarCard = () => {
 
   const handleAddEvent = async () => {
     try {
+      const bgColor = getRandomColor()
       const newTodo = await createTodo({
         todo: newEvent.title,
         startDate: newEvent.start,
         endDate: newEvent.end,
       }).unwrap();
-      setEvents([...events, { ...newEvent, title: newEvent.title, id: newTodo.id }]);
+      setEvents([...events, { ...newEvent, title: newEvent.title, id: newTodo.id, bgColor }]);
       setModalIsOpen(false);
     } catch (error) {
       console.error('Error adding todo:', error);
@@ -63,6 +76,11 @@ const CalendarCard = () => {
         selectable
         onSelectSlot={handleSelectSlot}
         className='calendar'
+        eventPropGetter={(event) => ({
+          style: {
+            backgroundColor: event.bgColor,
+          },
+        })}
       />
       <Modal
         isOpen={modalIsOpen}

@@ -20,6 +20,26 @@
     .rbc-today {
       background-color: #c4c2c2;
     }
+
+    .rbc-row-content {
+      height: 100%;
+      overflow-y: auto;
+      -ms-overflow-style:none;
+      &::-webkit-scrollbar{
+        display:none;
+      }
+      .rbc-row-segment {
+        
+        .rbc-event {
+          overflow: hidden;
+          padding: 2px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          border-radius: 4px;
+          color: #fff;
+        }
+      }
+    }
   }
 
   @media screen and (max-width: 1320px) {
