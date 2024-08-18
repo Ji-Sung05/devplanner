@@ -1,0 +1,24 @@
+.manual__inner {
+  padding: 8px;
+  color: white;
+  line-height: 1.6rem;
+  .manual__title {
+    margin-top: 10px;
+    font-size: 1.3rem;
+  }
+
+  .manual__desc {
+    margin-top: 5px;
+    font-size: 0.9rem;
+  }
+
+  img {
+    margin-top: 10px;
+    width: 50%;
+  }
+
+  ol {
+    margin-top: 10px;
+    list-style: none;
+  }
+}

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 //icons
+import { IoMdHelpCircleOutline } from "react-icons/io";
 import { HiOutlineBookOpen } from "react-icons/hi2";
 import { MdComputer } from "react-icons/md";
 
@@ -12,18 +13,17 @@ const BottomHeader = () => {
   return (
     <div className='bottomHeader'>
       <ul className='nav'>
-        <li  className={pathname === '/home' ? 'active' : ''}>
+        <li className={pathname === '/home' ? 'active' : ''}>
           <Link className='nav-link' to="/">
             <HiOutlineBookOpen color='white' size={'20px'} />
             <span className='nav-text'>Overview</span>
           </Link>
         </li>
-        {pathname === '/organization' || pathname === '/home' || isWorkPage ? (
+        {pathname === '/organization' || pathname === '/home' || pathname === '/manual' || isWorkPage ? (
           <li className={pathname === '/organization' ? 'active' : ''}>
             <Link className='nav-link' to="/organization">
               <MdComputer color='white' size={'20px'} />
               <span className='nav-text'>Organization</span>
-              {/* 갯수 */}
             </Link>
           </li>
         ) : (
@@ -31,10 +31,15 @@ const BottomHeader = () => {
             <Link className='nav-link' to="/repositories">
               <MdComputer color='white' size={'20px'} />
               <span className='nav-text'>repositories</span>
-              {/* 갯수 */}
             </Link>
           </li>
         )}
+        <li className={pathname === '/manual' ? 'active' : ''}>
+          <Link className='nav-link' to="/manual">
+            <IoMdHelpCircleOutline color='white' size={'20px'} />
+            <span className='nav-text'>Manual</span>
+          </Link>
+        </li>
       </ul>
     </div>
   )
