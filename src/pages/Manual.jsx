@@ -12,6 +12,13 @@ const Manual = () => {
             정책에서 `Remove Restrictions` 설정을 해야 하는 경우가 있습니다. <br />이 설정은 GitHub에서
             애플리케이션이 조직의 리소스에 액세스 할 수 있도록 허용하는 데 필요한 정책입니다.
           </p>
+          <p className='manual__title'>사용법</p>
+          <p className='manual__desc'>
+            1. 먼저 깃허브 페이지에서 새 조직을 생성하고 `Remove Restrictions`을 설정합니다. <br />
+            2. 애플리케이션으로 들어와서 Organization 탭으로 이동하면 생성한 조직이 나타납니다. <br />
+            3. 해당 조직에 들어간 후 레포지토리를 생성합니다. <br />
+            4. 레포지토리를 생성하고 나면 해당 레포지토리에서 수행할 작업들을 작성해서 관리할 수 있습니다.
+          </p>
           <p className='manual__title'>Remove Restrictions 설정 방법</p>
           <img src="/images/github1.png" alt="깃허브" />
           <ol>
