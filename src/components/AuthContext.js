@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
   const handleLogout = async () => {
     try {
       await logout().unwrap();
+      setIsAuth(false);
       window.location.href = "/";
     } catch (err) {
       console.error("Logout failed:", err);
