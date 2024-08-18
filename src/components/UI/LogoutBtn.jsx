@@ -2,10 +2,10 @@ import React, { useContext } from 'react'
 import { AuthContext } from '../AuthContext'
 
 const LogoutBtn = () => {
-  const { logout } = useContext(AuthContext);
+  const { handleLogout } = useContext(AuthContext);
 
   return (
-    <div className='logoutBtn' onClick={logout}>Logout</div>
+    <div className='logoutBtn' onClick={handleLogout}>Logout</div>
   )
 }
 
