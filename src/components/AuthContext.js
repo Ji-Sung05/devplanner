@@ -1,11 +1,12 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { useGetAuthQuery } from '../app/usersSlice';
+import { useGetAuthQuery, useLogoutMutation } from '../app/usersSlice';
 import { getCookie, removeCookie } from '../cookies/Cookies';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const { isSuccess } = useGetAuthQuery();
+  const [logout] = useLogoutMutation()
   const [isAuth, setIsAuth] = useState(isSuccess);
   let token = getCookie('token');
 
@@ -17,13 +18,17 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token, isSuccess]);
 
-  const logout = () => {
-    removeCookie('token');
-    setIsAuth(false);
+  const handleLogout = async () => {
+    try {
+      await logout().unwrap();
+      window.location.href = "/login";
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ isAuth, logout }}>
+    <AuthContext.Provider value={{ isAuth, handleLogout }}>
       {children}
     </AuthContext.Provider>
   );
