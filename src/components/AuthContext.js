@@ -21,9 +21,14 @@ export const AuthProvider = ({ children }) => {
   const handleLogout = async () => {
     try {
       await logout().unwrap();
+      removeCookie('token')
+      setIsAuth(false)
       window.location.href = '/login'; // 로그아웃 후 로그인 페이지로 리디렉트
     } catch (error) {
       console.error('Logout failed:', error);
+      removeCookie('token');
+      setIsAuth(false);
+      window.location.href = '/login';
     }
   };
 
