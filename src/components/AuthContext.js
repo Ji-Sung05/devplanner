@@ -1,12 +1,13 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { useGetAuthQuery } from '../app/usersSlice';
-import { getCookie, removeCookie } from '../cookies/Cookies';
+import { useGetAuthQuery, useLogoutMutation } from '../app/usersSlice';
+import { getCookie } from '../cookies/Cookies';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const { isSuccess } = useGetAuthQuery();
   const [isAuth, setIsAuth] = useState(isSuccess);
+  const [logout] = useLogoutMutation();
   let token = getCookie('token');
 
   useEffect(() => {
@@ -17,13 +18,17 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token, isSuccess]);
 
-  const logout = () => {
-    removeCookie('token');
-    setIsAuth(false);
+  const handleLogout = async () => {
+    try {
+      await logout().unwrap();
+      window.location.href = '/login'; // 로그아웃 후 로그인 페이지로 리디렉트
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ isAuth, logout }}>
+    <AuthContext.Provider value={{ isAuth, handleLogout }}>
       {children}
     </AuthContext.Provider>
   );

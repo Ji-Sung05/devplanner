@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { getCookie } from "../cookies/Cookies";
-console.log('123', getCookie('token'))
+import { getCookie, removeCookie } from "../cookies/Cookies";
 export const userSlice = createApi({
   reducerPath: "user",
   baseQuery: fetchBaseQuery({
@@ -17,7 +16,23 @@ export const userSlice = createApi({
     getAuth: builder.query({
       query: () => "/user"
     }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "/logout",
+        method: "POST",
+      }),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          // 로그아웃 성공 시 쿠키에서 토큰을 삭제
+          removeCookie('token');
+          // 필요 시 클라이언트 상태 초기화
+        } catch (error) {
+          console.error('Logout failed:', error);
+        }
+      },
+    }),
   })
 })
 
-export const { useGetAuthQuery } = userSlice
+export const { useGetAuthQuery, useLogoutMutation } = userSlice
