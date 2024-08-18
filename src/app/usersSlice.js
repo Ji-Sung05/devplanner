@@ -20,6 +20,7 @@ export const userSlice = createApi({
       query: () => ({
         url: "/logout",
         method: "GET", 
+        responseHandler: (response) => response.text(),
       }),
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
