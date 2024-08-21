@@ -1,6 +1,8 @@
 import React, { useEffect, useState, createContext, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useFetchTasksQuery, useAddTaskMutation, useUpdateTaskMutation, useDeleteTasksMutation } from '../app/project';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 //pages
 import Home from './Home';
 //components
@@ -65,6 +67,7 @@ const Work = () => {
     };
     setRows((prevRows) => [...prevRows, newRow]);
     plusCurrentId()
+    toast("작업 생성!")
   };
 
   const actions = useMemo(
@@ -85,8 +88,10 @@ const Work = () => {
         }
         try {
           await addTask({ projectId: id, task: newTodo }).unwrap();
+          toast("작업이 성공적으로 저장되었습니다!")
         } catch (error) {
           console.error('Error saving task:', error);
+          toast.error("작업 저장을 실패했습니다.")
         }
       },
       update: async (rowId) => {
@@ -99,8 +104,10 @@ const Work = () => {
         }
         try {
           await updateTask({ projectId: id, taskId: rowId, task: updateTodo }).unwrap();
+          toast('작업이 성공적으로 수정되었습니다!')
         } catch (error) {
           console.error('Error saving task:', error);
+          toast.error('작업 수정을 실패했습니다.')
         }
       },
       updateStatus: async (rowId, status) => {
@@ -131,8 +138,10 @@ const Work = () => {
       deleteTask: async (rowId) => {
         try {
           await deleteTask({ projectId: id, taskId: rowId }).unwrap()
+          toast.info('작업을 성공적으로 삭제했습니다!')
         } catch(error) {
           console.error('Error delete task:', error)
+          toast.error('작업 삭제를 실패했습니다.')
         }
       }
     }),
@@ -162,6 +171,11 @@ const Work = () => {
           ) : null}
         </actionContext.Provider>
       </div>
+      <ToastContainer 
+        position='bottom-right'
+        theme='light'
+        autoClose={1500}
+      />
     </Home>
   );
 };

@@ -10,6 +10,11 @@ const EditRow = ({ row }) => {
     setIsOption(prevState => !prevState);
   };
 
+  const updateHandler = (taskId) => {
+    update(taskId)
+    setIsOption(false)
+  }
+
   return (
     <tr>
       <td>
@@ -19,7 +24,7 @@ const EditRow = ({ row }) => {
             {
               isOption && (
                 <ul>
-                  <li value="update" onClick={() => update(row.taskId)}>수정하기</li>
+                  <li value="update" onClick={() => updateHandler(row.taskId)}>수정하기</li>
                   <li value="delete" onClick={() => deleteTask(row.taskId)}>삭제하기</li>
                   <li value="move" onClick={() => updateStatus(row.taskId, row.status)}>완료</li>
                 </ul>
