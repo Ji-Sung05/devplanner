@@ -11,6 +11,11 @@ const Card = ({ item }) => {
     setIsOption(prevState => !prevState);
   };
 
+  const updateHandler = (taskId) => {
+    update(taskId)
+    setIsOption(false)
+  }
+
   return (
     <div id='card' onClick={() => updateStatus(item.taskId, item.status)}>
       <div className='card__inner'>
@@ -20,7 +25,7 @@ const Card = ({ item }) => {
             {
               isOption && (
                 <ul>
-                  <li value="update" onClick={() => update(item.taskId)}>수정하기</li>
+                  <li value="update" onClick={() => updateHandler(item.taskId)}>수정하기</li>
                   <li value="delete" onClick={() => deleteTask(item.taskId)}>삭제하기</li>
                   <li value="move" onClick={() => updateStatus(item.taskId, item.status)}>완료</li>
                 </ul>

@@ -7,6 +7,12 @@
 }
 
 .board__section {
+  overflow: hidden;
+  overflow-y: auto;
+  -ms-overflow-style:none;
+  &::-webkit-scrollbar{
+    display:none;
+  }
   .card__container {
     width: 300px;
     height: 670px;
