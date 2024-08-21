@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDeleteTodoMutation } from '../app/todoSlice';
 import TodoRow from './TodoRow';
+import { toast } from 'react-toastify';
 
 const TodoContainer = ({ tasks }) => {  
   const [deleteTodo] = useDeleteTodoMutation(); 
@@ -8,6 +9,7 @@ const TodoContainer = ({ tasks }) => {
   const handleDelete = async (id) => {
     try {
       await deleteTodo(id).unwrap(); 
+      toast('작업이 삭제되었습니다!')
     } catch (error) {
       console.error('Error deleting task:', error);
     }

@@ -6,6 +6,7 @@ import Modal from 'react-modal';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import { useCreateTodoMutation } from '../app/todoSlice';
+import { toast } from 'react-toastify';
 
 //momentLocalizer: moment.js를 캘리더의 날짜 형식에 맞게 로컬라이즈하는 역할 
 const localizer = momentLocalizer(moment);
@@ -57,6 +58,7 @@ const CalendarCard = ({ tasks }) => {
         startDate: newEvent.start,
         endDate: newEvent.end,
       }).unwrap();
+      toast('작업이 생성되었습니다!')
       setEvents([...events, { ...newEvent, title: newEvent.title, id: newTodo.id, bgColor }]);
       setModalIsOpen(false);
     } catch (error) {

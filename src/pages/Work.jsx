@@ -67,7 +67,6 @@ const Work = () => {
     };
     setRows((prevRows) => [...prevRows, newRow]);
     plusCurrentId()
-    toast("작업 생성!")
   };
 
   const actions = useMemo(
