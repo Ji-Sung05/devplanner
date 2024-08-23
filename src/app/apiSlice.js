@@ -41,7 +41,7 @@ export const apiSlice = createApi({
     cloneRepo: builder.mutation({
       query: ({ orgName, repoName}) => 
       ({
-        url: `/repo/${orgName}/${repoName}/clone-url`,
+        url: `/repos/${orgName}/${repoName}/clone-url`,
         method: 'GET'
       })
     })
