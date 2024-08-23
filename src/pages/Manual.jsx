@@ -12,6 +12,9 @@ const Manual = () => {
             정책에서 `Remove Restrictions` 설정을 해야 하는 경우가 있습니다. <br />이 설정은 GitHub에서
             애플리케이션이 조직의 리소스에 액세스 할 수 있도록 허용하는 데 필요한 정책입니다.
           </p>
+          <div>
+            <video src="/public/images/dev.mp4" controls></video>
+          </div>
           <p className='manual__title'>사용법</p>
           <p className='manual__desc'>
             1. 먼저 깃허브 페이지에서 새 조직을 생성하고 `Remove Restrictions`을 설정합니다. <br />
