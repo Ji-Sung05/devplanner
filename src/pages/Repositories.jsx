@@ -15,7 +15,6 @@ const Repositories = () => {
   const { data: repos, refetch } = useGetReposQuery(org, {
     skip: !org,
   });
-  console.log(repos)
   const [cloneRepo] = useCloneRepoMutation();
   const [createProject] = useCreateProjectMutation();
 
