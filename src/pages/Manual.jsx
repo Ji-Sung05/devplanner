@@ -13,7 +13,7 @@ const Manual = () => {
             애플리케이션이 조직의 리소스에 액세스 할 수 있도록 허용하는 데 필요한 정책입니다.
           </p>
           <div>
-            <video src="/images/dev.mp4" controls></video>
+            <video src="/images/dev.mp4" width={480} controls></video>
           </div>
           <p className='manual__title'>사용법</p>
           <p className='manual__desc'>
