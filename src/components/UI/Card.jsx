@@ -17,7 +17,7 @@ const Card = ({ item }) => {
   }
 
   return (
-    <div id='card' onClick={() => updateStatus(item.taskId, item.status)}>
+    <div id='card'>
       <div className='card__inner'>
         <div className='card__top'>
           <div className='option'>
