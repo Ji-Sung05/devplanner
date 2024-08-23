@@ -33,7 +33,7 @@ const Card = ({ item }) => {
             }
           </div>
           <div>
-            <FaRegCheckCircle onClick={() => add(item.taskId)} />
+            <FaRegCheckCircle style={{cursor: 'pointer'}} onClick={() => add(item.taskId)} />
             <input type="text" value={item.todo} onChange={(e) => edit(item.taskId, 'todo', e.target.value)} />
           </div>
         </div>

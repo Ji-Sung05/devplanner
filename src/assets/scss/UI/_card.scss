@@ -16,6 +16,10 @@
     .option {
       position: relative;
 
+      span {
+        cursor: pointer;
+      }
+
       ul {
         padding: 5px;
         position: absolute;
