@@ -55,6 +55,7 @@
         }
 
         &:nth-child(1) {
+          width: 75%;
           border-left: none;
           border-right: none;
         }
@@ -63,6 +64,7 @@
           width: 25%;
           border-left: none;
           border-right: none;
+          background-color: red;
 
           input[type="date"]::-webkit-calendar-picker-indicator {
             background-color: white;
