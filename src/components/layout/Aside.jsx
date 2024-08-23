@@ -5,9 +5,8 @@ import { FaFaceMeh } from "react-icons/fa6";
 import LogoutBtn from './../UI/LogoutBtn';
 
 const Aside = () => {
-  const { data, isLoading } = useGetAuthQuery();
+  const { data } = useGetAuthQuery();
 
-  if(isLoading) return <div>Loading...</div>
   return (
     <aside id='aside' role='contentinfo'>
       <div className="aside__inner">

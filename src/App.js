@@ -1,10 +1,11 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Home from './pages/Home';
-import Login from './pages/Login';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import NotAuthRoutes from './components/NotAuthRoutes';
 import {  AuthProvider } from './components/AuthContext';
+//pages
+import Home from './pages/Home';
+import Login from './pages/Login';
 import Organization from './pages/Organization';
 import Repositories from './pages/Repositories';
 import CreateRepo from './pages/CreateRepo';

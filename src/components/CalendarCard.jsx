@@ -1,70 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 //날짜와 시간을 다루기 위한 라이브러리
 import moment from 'moment';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import Modal from 'react-modal';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
-import { useCreateTodoMutation } from '../app/todoSlice';
-import { toast } from 'react-toastify';
+
+import useEvents from '../utils/useEvents';
+import useModal from '../utils/useModal';
 
 //momentLocalizer: moment.js를 캘리더의 날짜 형식에 맞게 로컬라이즈하는 역할 
 const localizer = momentLocalizer(moment);
 
 const CalendarCard = ({ tasks }) => {
-  //캘린더에 표시될 이벤트 목록
-  const [events, setEvents] = useState([]);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  //새로 추가할 이벤트의 제목과 날짜 범위
-  const [newEvent, setNewEvent] = useState({ title: '', start: '', end: '' });
-  const [createTodo] = useCreateTodoMutation();
-
-  //api 에서 가져온 데이터를 캘린더에 맞는 형식으로 변환하여 events 상태를 업데이트
-  useEffect(() => {
-    if (tasks.length > 0) {
-      const formattedTasks = tasks.map(task => ({
-        ...task,
-        title: task.todo,
-        start: new Date(task.startDate),
-        end: new Date(task.endDate),
-        bgColor: task.bgColor || getRandomColor(),
-      }));
-      setEvents(formattedTasks);
-    } else {
-      // tasks가 빈 배열일 때 events도 빈 배열로 설정
-      setEvents([]);
-    }
-  }, [tasks]);
-
-  const getRandomColor = () => {
-    const letters = '123456789ABCDEF'
-    let color = '#'
-    for(let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)]
-    }
-    return color
-  }
-
-  const handleSelectSlot = ({ start, end }) => {
-    setNewEvent({ title: '', start, end });
-    setModalIsOpen(true);
-  };
-
-  const handleAddEvent = async () => {
-    try {
-      const bgColor = getRandomColor()
-      const newTodo = await createTodo({
-        todo: newEvent.title,
-        startDate: newEvent.start,
-        endDate: newEvent.end,
-      }).unwrap();
-      toast('작업이 생성되었습니다!')
-      setEvents([...events, { ...newEvent, title: newEvent.title, id: newTodo.id, bgColor }]);
-      setModalIsOpen(false);
-    } catch (error) {
-      console.error('Error adding todo:', error);
-    }
-  };
+  const [events, setEvents] = useEvents(tasks)
+  const {
+    modalIsOpen,
+    newEvent,
+    setNewEvent,
+    handleSelectSlot,
+    handleAddEvent,
+    closeModal,
+  } = useModal(events, setEvents)
 
   return (
     <div className='calendarcard'>
@@ -86,7 +43,7 @@ const CalendarCard = ({ tasks }) => {
       />
       <Modal
         isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
+        onRequestClose={closeModal}
         contentLabel="Add Event"
         className='ReactModal__Content'
         overlayClassName='ReactModal__Overlay'
@@ -124,7 +81,7 @@ const CalendarCard = ({ tasks }) => {
         </form>
         <div className="modal-footer">
           <button type="button" onClick={handleAddEvent}>추가</button>
-          <button type="button" onClick={() => setModalIsOpen(false)}>취소</button>
+          <button type="button" onClick={closeModal}>취소</button>
         </div>
       </Modal>
     </div>
