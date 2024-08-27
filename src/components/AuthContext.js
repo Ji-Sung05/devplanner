@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useGetAuthQuery, useLogoutMutation } from '../app/usersSlice';
-import { getCookie } from '../cookies/Cookies';
+import { getCookie, removeCookie } from '../cookies/Cookies';
 
 export const AuthContext = createContext();
 
@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
 
   const handleLogout = async () => {
     try {
+      removeCookie('token')
       await logout().unwrap();
       window.location.href = "/";
     } catch (err) {
