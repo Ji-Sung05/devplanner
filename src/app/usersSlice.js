@@ -18,15 +18,15 @@ export const userSlice = createApi({
     }),
     logout: builder.mutation({
       query: () => ({
-        url: "/logout",
-        method: "GET", 
-        responseHandler: (response) => response.text(),
+        url: '/logout',
+        method: "GET",
       }),
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
-          removeCookie('token');
+          // 서버의 로그아웃 요청이 성공하면 클라이언트에서 쿠키를 제거합니다.
           await queryFulfilled;
-          dispatch(userSlice.util.resetApiState());
+          removeCookie('token'); // 클라이언트 측의 토큰 쿠키 제거
+          dispatch(userSlice.util.resetApiState()); // 상태 초기화
         } catch (err) {
           console.error("Logout failed:", err);
         }
