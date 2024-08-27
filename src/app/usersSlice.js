@@ -24,8 +24,8 @@ export const userSlice = createApi({
       }),
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
-          await queryFulfilled;
           removeCookie('token');
+          await queryFulfilled;
           dispatch(userSlice.util.resetApiState());
         } catch (err) {
           console.error("Logout failed:", err);
