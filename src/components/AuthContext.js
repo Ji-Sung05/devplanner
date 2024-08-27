@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await logout().unwrap();
       setIsAuth(false);
-      window.location.href = "/";
+      window.location.href = "https://accounts.google.com/Logout";
     } catch (err) {
       console.error("Logout failed:", err);
     }
