@@ -6,7 +6,7 @@ import LogoutBtn from './../UI/LogoutBtn';
 
 const Aside = () => {
   const { data } = useGetAuthQuery();
-
+  console.log(data)
   return (
     <aside id='aside' role='contentinfo'>
       <div className="aside__inner">
