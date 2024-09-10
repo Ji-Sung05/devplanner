@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { getCookie, removeCookie } from "../cookies/Cookies";
+import { getCookie } from "../cookies/Cookies";
 export const userSlice = createApi({
   reducerPath: "user",
   baseQuery: fetchBaseQuery({

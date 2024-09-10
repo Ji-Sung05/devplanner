@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Landing = () => {
   const { data: tasks = [] } = useFetchTodosQuery();
+  
   return (
     <section id='landing'>
       <div className='landing__inner'>
