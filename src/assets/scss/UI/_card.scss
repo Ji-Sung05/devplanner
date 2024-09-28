@@ -112,6 +112,10 @@
       color: white;
       padding: 0 5px;
       letter-spacing: 0.05rem;
+
+      &:hover {
+        border: 1px solid #fff;
+      }
     }
   }
 
