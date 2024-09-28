@@ -130,8 +130,10 @@ const Work = () => {
         }
         try {
           await updateTask({ projectId: id, taskId: rowId, task: updateTodo }).unwrap();
+          toast.info('작업을 완료했습니다!')
         } catch (error) {
           console.error('Error saving task:', error);
+          toast.error('작업 완료를 실패했습니다.')
         }
       },
       deleteTask: async (rowId) => {
