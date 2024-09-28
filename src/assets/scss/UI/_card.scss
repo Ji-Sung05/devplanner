@@ -7,6 +7,7 @@
   margin: 0 auto;
 
   .card__top {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -15,6 +16,7 @@
 
     .option {
       position: relative;
+      background-color: red;
 
       span {
         cursor: pointer;
@@ -26,7 +28,7 @@
         top: -15px;
         left: 10px;
         width: 75px;
-        height: 80px;
+        height: 70px;
         background-color: var(--inner-co);
         border: 1px solid var(--line-co);
         border-radius: 3px;
@@ -34,6 +36,7 @@
 
         li {
           cursor: pointer;
+          text-align: center;
         }
       }
     }
@@ -43,6 +46,7 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
+      gap: 5px;
       
       input {
         width: 100%;
@@ -50,7 +54,6 @@
         color: white;
         padding: 0 2px;
         letter-spacing: 0.05rem;
-        margin-left: 5px;
       }
     }
   }
