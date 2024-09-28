@@ -43,11 +43,12 @@
       align-items: center;
       
       input {
-        width: 92%;
-        background-color: inherit;
+        width: 100%;
+        background-color: red;
         color: white;
         padding: 0 2px;
         letter-spacing: 0.05rem;
+        margin-left: 5px;
       }
     }
   }
@@ -59,12 +60,11 @@
     margin-bottom: 5px;
 
     input:nth-child(1) {
-      width: 100%;
+      width: 60%;
       background-color: inherit;
       color: white;
       padding: 0 5px;
       letter-spacing: 0.05rem;
-      background-color: red;
     }
 
     input:nth-child(2) {
