@@ -74,6 +74,10 @@
       color: white;
       padding: 0 5px;
       letter-spacing: 0.05rem;
+
+      &:hover {
+        border: 1px solid #fff;
+      }
     }
 
     input:nth-child(2) {
@@ -81,6 +85,10 @@
       color: white;
       padding: 0 5px;
       letter-spacing: 0.05rem;
+
+      &:hover {
+        border: 1px solid #fff;
+      }
     }
 
     input[type="date"]::-webkit-calendar-picker-indicator {
