@@ -8,7 +8,7 @@ const BoardSection = ({title, data, $addWork, plus}) => {
   return (
     <section className='board__section'>
       <div className='card__container'>
-        <h2>{title}</h2>
+        <h3>{title}</h3>
         {data.length > 0 ? (
           data.map((item) => (
             <Card item={item} key={item.taskId} />

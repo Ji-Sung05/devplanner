@@ -11,9 +11,10 @@
   .card__container {
     width: 320px;
     padding: 10px;
-    height: 97%;
+    height: 100%;
     background-color: var(--inner-dark-co);
     border-radius: 6px;
+    color: var(--text-co);
     display: flex;
     flex-direction: column;
     gap: 15px;
