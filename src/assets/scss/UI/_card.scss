@@ -3,11 +3,10 @@
   width: 298px;
   background-color: var(--inner-co);
   border-radius: 6px;
-  color: var(--text-co);
   margin: 0 auto;
   transition: all 0.3s;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(0.9);
   }
 
   .card__top {
@@ -55,7 +54,7 @@
       input {
         width: 100%;
         background-color: inherit;
-        color: white;
+        color: var(--text-co);
         padding: 0 2px;
         letter-spacing: 0.05rem;
 
@@ -75,7 +74,7 @@
     input:nth-child(1) {
       width: 60%;
       background-color: inherit;
-      color: white;
+      color: var(--text-co);
       padding: 0 5px;
       letter-spacing: 0.05rem;
 
@@ -86,7 +85,7 @@
 
     input:nth-child(2) {
       background-color: inherit;
-      color: white;
+      color: var(--text-co);
       padding: 0 5px;
       letter-spacing: 0.05rem;
 
@@ -113,7 +112,7 @@
     input {
       width: 100%;
       background-color: inherit;
-      color: white;
+      color: var(--text-co);
       padding: 0 5px;
       letter-spacing: 0.05rem;
 
