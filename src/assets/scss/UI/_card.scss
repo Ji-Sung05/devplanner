@@ -5,9 +5,9 @@
   border-radius: 6px;
   color: white;
   margin: 0 auto;
-
+  transition: all 0.3s;
   &:hover {
-    box-shadow: 0px 5px 2px var(--inner-co);
+    transform: scale(1.2);
   }
 
   .card__top {
