@@ -1,10 +1,14 @@
 .card__inner {
   padding: 8px;
   width: 298px;
-  border: 1px solid #fff;
+  background-color: var(--inner-co);
   border-radius: 6px;
   color: white;
   margin: 0 auto;
+
+  &:hover {
+    box-shadow: 0px 5px 2px var(--inner-co);
+  }
 
   .card__top {
     width: 100%;

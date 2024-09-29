@@ -7,11 +7,11 @@
 }
 
 .board__section {
-  background-color: var(--inner-dark-co);
+  
   .card__container {
     width: 300px;
     height: 93%;
-    background-color: var(--inner-co);
+    background-color: var(--inner-dark-co);
     border-radius: 6px;
     display: flex;
     flex-direction: column;
@@ -21,10 +21,6 @@
     -ms-overflow-style:none;
     &::-webkit-scrollbar{
       display:none;
-    }
-
-    &:hover {
-      box-shadow: 0px 5px 2px var(--inner-dark-co);
     }
 
     .card__addwork {
