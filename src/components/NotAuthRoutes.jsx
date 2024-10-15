@@ -7,7 +7,7 @@ const NotAuthRoutes = () => {
   const location = useLocation();
 
   return (
-    isAuth ? <Navigate to={location.pathname} /> : <Outlet />
+    isAuth ? <Navigate to={location.pathname ? location.pathname : '/home'} /> : <Outlet />
   )
 }
 
