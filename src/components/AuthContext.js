@@ -11,10 +11,11 @@ export const AuthProvider = ({ children }) => {
   let token = getCookie('token');
 
   useEffect(() => {
-    if (!token) {
-      setIsAuth(false);
+    // 토큰이 있고, API 호출이 성공하면 인증 상태를 true로 설정
+    if (token && isSuccess) {
+      setIsAuth(true);
     } else {
-      setIsAuth(isSuccess);
+      setIsAuth(false);
     }
   }, [token, isSuccess]);
 
