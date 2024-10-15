@@ -8,7 +8,7 @@ const NotAuthRoutes = () => {
   console.log(location)
 
   return (
-    isAuth ? <Navigate to={location.pathname === '' ? location.pathname : '/home'} /> : <Outlet />
+    isAuth && location.pathname === '/' ? <Navigate to="/home" /> : <Outlet />
   )
 }
 
