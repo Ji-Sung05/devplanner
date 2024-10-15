@@ -28,9 +28,9 @@ function App() {
         </Route>
         
         {/* 로그인한 사람은 갈 수 없는 경로 */}
-        <Route element={<NotAuthRoutes />}>
+
           <Route path='/' element={<Login />} />
-        </Route>
+
       </Routes>
     </AuthProvider>
   );
