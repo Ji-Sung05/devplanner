@@ -46,7 +46,7 @@ const BottomHeader = () => {
           </Link>
         </li>
       </ul>
-      <button onClick={handleRefresh}><IoMdRefresh /></button>
+      <button onClick={handleRefresh} className='refreshBtn'><IoMdRefresh color='white' size={20} /></button>
     </div>
   )
 }
