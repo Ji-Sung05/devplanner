@@ -20,7 +20,7 @@ function App() {
       <Routes>
         {isAuth ? (
         <Route element={<ProtectedRoutes />}>
-          <Route path='/home' element={<Home />} />
+          <Route path='/' element={<Home />} />
           <Route path='/organization' element={<Organization />} />
           <Route path='/repositories' element={<Repositories />} />
           <Route path='/create-repo' element={<CreateRepo />} />
@@ -28,7 +28,7 @@ function App() {
           <Route path='/manual' element={<Manual />} />
         </Route>
         ) : (
-          <Route path='/' element={<Login />} />
+          <Route path='/login' element={<Login />} />
         )}
       </Routes>
     </AuthProvider>

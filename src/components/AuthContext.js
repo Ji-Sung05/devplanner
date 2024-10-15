@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
     try {
       //await logout().unwrap();
       setIsAuth(false);
-      window.location.href = "/";
+      window.location.href = "/login";
     } catch (err) {
       console.error("Logout failed:", err);
     }
