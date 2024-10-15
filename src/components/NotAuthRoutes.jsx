@@ -1,15 +1,13 @@
 import React, { useContext } from 'react'
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { AuthContext } from './AuthContext';
 
 const NotAuthRoutes = () => {
-  const { isAuth, loading } = useContext(AuthContext);
+  const { isAuth } = useContext(AuthContext);
+  const location = useLocation();
 
-  if (loading) {
-    return <div>Loading...</div>;  // 로딩 중일 때 리다이렉션 하지 않음
-  }
   return (
-    isAuth ? <Navigate to={'/organization'} /> : <Outlet />
+    isAuth ? <Navigate to={location.pathname} /> : <Outlet />
   )
 }
 
