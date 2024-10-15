@@ -12,7 +12,7 @@ const BottomHeader = () => {
   const isWorkPage = pathname.startsWith('/work');
 
   const handleRefresh = () => {
-    window.location.reload(false);
+    window.location.reload();
   }
 
   return (

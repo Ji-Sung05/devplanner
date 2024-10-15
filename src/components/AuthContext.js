@@ -11,11 +11,10 @@ export const AuthProvider = ({ children }) => {
   let token = getCookie('token');
 
   useEffect(() => {
-    // 토큰이 있고, API 호출이 성공하면 인증 상태를 true로 설정
-    if (token && isSuccess) {
-      setIsAuth(true);
-    } else {
+    if (!token) {
       setIsAuth(false);
+    } else {
+      setIsAuth(isSuccess);
     }
   }, [token, isSuccess]);
 
@@ -23,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     try {
       //await logout().unwrap();
       setIsAuth(false);
-      window.location.href = "/login";
+      window.location.href = "/";
     } catch (err) {
       console.error("Logout failed:", err);
     }
