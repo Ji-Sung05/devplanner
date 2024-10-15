@@ -9,7 +9,7 @@ const NotAuthRoutes = () => {
     return <div>Loading...</div>;  // 로딩 중일 때 리다이렉션 하지 않음
   }
   return (
-    isAuth ? <Navigate to={'/home'} /> : <Outlet />
+    isAuth ? <Navigate to={'/organization'} /> : <Outlet />
   )
 }
 
