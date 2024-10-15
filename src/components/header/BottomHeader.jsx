@@ -5,10 +5,15 @@ import { Link, useLocation } from 'react-router-dom'
 import { IoMdHelpCircleOutline } from "react-icons/io";
 import { HiOutlineBookOpen } from "react-icons/hi2";
 import { MdComputer } from "react-icons/md";
+import { IoMdRefresh } from "react-icons/io";
 
 const BottomHeader = () => {
   const { pathname } = useLocation()
   const isWorkPage = pathname.startsWith('/work');
+
+  const handleRefresh = () => {
+    window.location.reload();
+  }
 
   return (
     <div className='bottomHeader'>
@@ -41,6 +46,7 @@ const BottomHeader = () => {
           </Link>
         </li>
       </ul>
+      <button onClick={handleRefresh}><IoMdRefresh /></button>
     </div>
   )
 }
