@@ -7,13 +7,13 @@ const TodoRow = ({ data, del }) => {
     <table>
       <tbody>
         <tr>
-          <td style={{width: '80%'}}>
+          <td style={{width: '75%'}}>
             <div>
               <FaRegCheckCircle />
               <span>{data.todo}</span>
             </div>
           </td>
-          <td style={{width: '20%'}}>
+          <td style={{width: '25%'}}>
             <div>
               <span>{data.endDate.slice(0, 10)}</span>
               <FaRegTrashAlt style={{ cursor: 'pointer' }} color='white' onClick={() => del(data._id)} /> 
