@@ -19,7 +19,7 @@ const BottomHeader = () => {
     <div className='bottomHeader'>
       <ul className='nav'>
         <li className={pathname === '/home' ? 'active' : ''}>
-          <Link className='nav-link' to="/">
+          <Link className='nav-link' to="/home">
             <HiOutlineBookOpen color='white' size={'20px'} />
             <span className='nav-text'>Overview</span>
           </Link>
