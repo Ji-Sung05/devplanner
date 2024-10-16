@@ -18,19 +18,19 @@ function App() {
     <AuthProvider>
       <Routes>
         {/* 로그인한 사람만 갈 수 있는 경로 */}
-        <Route element={<ProtectedRoutes />}>
-          <Route path='/home' element={<Home />} />
-          <Route path='/organization' element={<Organization />} />
-          <Route path='/repositories' element={<Repositories />} />
-          <Route path='/create-repo' element={<CreateRepo />} />
-          <Route path='/work/:repo' element={<Work />} />
-          <Route path='/manual' element={<Manual />} />
-        </Route>
+        {/* <Route element={<ProtectedRoutes />}>
+        </Route> */}
+        <Route path='/home' element={<Home />} />
+        <Route path='/organization' element={<Organization />} />
+        <Route path='/repositories' element={<Repositories />} />
+        <Route path='/create-repo' element={<CreateRepo />} />
+        <Route path='/work/:repo' element={<Work />} />
+        <Route path='/manual' element={<Manual />} />
         
+        <Route path='/' element={<Login />} />
         {/* 로그인한 사람은 갈 수 없는 경로 */}
-        <Route element={<NotAuthRoutes />}>
-          <Route path='/' element={<Login />} />
-        </Route>
+        {/* <Route element={<NotAuthRoutes />}>
+        </Route> */}
       </Routes>
     </AuthProvider>
   );
