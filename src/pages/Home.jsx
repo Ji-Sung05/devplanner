@@ -1,9 +1,11 @@
 import React from 'react'
-import Header from '../components/layout/Header'
-import Aside from '../components/layout/Aside'
-import Main from '../components/layout/Main'
-import Landing from './Landing'
 import { useLocation } from 'react-router-dom'
+//레이아웃
+import Header from '../components/layout/Header'
+import SideBar from './../components/layout/SideBar';
+import Main from '../components/layout/Main'
+//페이지
+import Landing from './Landing'
 
 const Home = (props) => {
   const location = useLocation()
@@ -12,7 +14,7 @@ const Home = (props) => {
     <div id='container'>
       <Header />
       <div className={`container__inner ${isWorkPage ? 'work' : ''}`}>
-        <Aside />
+        <SideBar />
         <Main>
           {props.children ? props.children : <Landing />}
         </Main>

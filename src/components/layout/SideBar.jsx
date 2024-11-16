@@ -4,8 +4,7 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { useGetAuthQuery } from "../../app/usersSlice";
 import LogoutBtn from "./../UI/LogoutBtn";
 
-// Aside 는 html 태그 이름 -> 컴포넌트의 목적에 맞테 예를들면 SideBar?
-const Aside = () => {
+const SideBar = () => {
   const { data } = useGetAuthQuery();
 
   return (
@@ -35,4 +34,4 @@ const Aside = () => {
   );
 };
 
-export default Aside;
+export default SideBar;
