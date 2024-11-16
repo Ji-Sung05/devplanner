@@ -97,7 +97,10 @@ const Repositories = () => {
                 <h3>{repo.name}</h3>
                 <span>{repo.visibility}</span>
                 <button onClick={(e) => handleCloneClick(org, repo.name, e)}><BsCopy color='white' /></button>
+<<<<<<< HEAD
                 <button onClick={(e) => handleDeleteClick(org, repo.name, e)}>삭제</button>
+=======
+>>>>>>> c01d94e6338780693836577ce8e334838079e3d9
               </div>
               <div className='repositories__bottom'>
                 <span>{repo.language}</span>
