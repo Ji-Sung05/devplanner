@@ -1,10 +1,14 @@
 import React from "react";
+//api
+import { useGetAuthQuery } from "../../app/usersSlice";
+//아이콘
 import { FaFaceMeh } from "react-icons/fa6";
 import { MdOutlineMailOutline } from "react-icons/md";
-import { useGetAuthQuery } from "../../app/usersSlice";
+//컴포넌트
 import LogoutBtn from "./../UI/LogoutBtn";
 
 const SideBar = () => {
+  //사용자 계정 데이터
   const { data } = useGetAuthQuery();
 
   return (
