@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 //레이아웃
-import Header from '../components/layout/Header'
+import Navigation from './../components/layout/Navigation';
 import SideBar from './../components/layout/SideBar';
 import Main from '../components/layout/Main'
 //페이지
@@ -12,7 +12,7 @@ const Home = (props) => {
   const isWorkPage = location.pathname.slice(0,5) === '/work';
   return (
     <div id='container'>
-      <Header />
+      <Navigation />
       <div className={`container__inner ${isWorkPage ? 'work' : ''}`}>
         <SideBar />
         <Main>
