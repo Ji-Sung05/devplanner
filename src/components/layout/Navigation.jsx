@@ -1,10 +1,11 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 //아이콘
 import { FaGithub } from "react-icons/fa6";
 import { HiOutlineBookOpen } from "react-icons/hi2";
 import { IoMdHelpCircleOutline, IoMdRefresh } from "react-icons/io";
 import { MdComputer } from "react-icons/md";
+//컴포넌트
 import NavItem from "../NavItem";
 
 const Navigation = () => {

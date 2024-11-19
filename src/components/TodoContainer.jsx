@@ -1,6 +1,9 @@
 import React from 'react';
-import { useDeleteTodoMutation } from '../app/todoSlice';
+//컴포넌트
 import TodoRow from './TodoRow';
+//api
+import { useDeleteTodoMutation } from '../app/todoSlice';
+//Toast 라이브러리
 import { toast } from 'react-toastify';
 
 const TodoContainer = ({ tasks }) => {  
