@@ -1,7 +1,9 @@
-import React, { createContext, useEffect, useMemo, useState } from "react";
+import React, { createContext, useState } from "react";
 import { useLocation } from "react-router-dom";
+//Toast 라이브러리
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+//api
 import {
   useAddTaskMutation,
   useDeleteTasksMutation,
@@ -19,19 +21,11 @@ import ListContainer from "./../components/ListContainer";
 export const actionContext = createContext();
 
 const Work = () => {
+  //작업 추가를 누르면 입력 폼이 생기게 한다.
   const location = useLocation();
   const { id, name, org } = location.state;
-  // rows 상태를 선언했지만 렌더링하는 부분에는 사용하지 않음
-  // state를 사용하는 이유는 -> state가 변경되면 리렌더링이 일어남 -> 사용자가 보는 화면이 변경됌
-  // rosw가 꼭 필요한 상태인지 확인을 해보면 좋을 거 같습니다.
-  const [rows, setRows] = useState([]);
 
-  const [currentId, setCurrentId] = useState(1);
   const [category, setCategory] = useState("");
-
-  const plusCurrentId = () => {
-    setCurrentId(currentId + 1);
-  };
 
   // 여기서는 useFetchTasksQuery에서 가공된 데이터를 바로 사용
   const { data: tasks = [] } = useFetchTasksQuery(id, {
@@ -44,137 +38,77 @@ const Work = () => {
   // 서버 상태를 가지고와서 로컬 상태로 초기화 해주는 거 같음.
   // 서버 상태를 로컬 상태와 동기화 해서. 사용해야 할까?
   // 만약 꼭 초기화를 해야 한다면 useState의 초기값을 서버 상태로 설정해주는 것이 좋을 것 같다.
-  useEffect(() => {
-    if (tasks && tasks.length > 0) {
-      setRows(
-        tasks.map((task) => ({
-          ...task,
-          date: task.date ? task.date.split("T")[0] : "",
-        }))
-      );
-      const maxId = Math.max(...tasks.map((task) => task.taskId), currentId);
-      setCurrentId(maxId + 1);
-    }
-  }, [tasks]);
 
-  const todo = rows.filter((row) => {
-    return row.status === "To Do";
+  const todo = tasks.filter((task) => {
+    return task.status === "To Do";
   });
 
-  const inprogress = rows.filter((row) => {
-    return row.status === "In Progress";
+  const inprogress = tasks.filter((task) => {
+    return task.status === "In Progress";
   });
 
-  const done = rows.filter((row) => {
-    return row.status === "Done";
+  const done = tasks.filter((task) => {
+    return task.status === "Done";
   });
 
   let doneLength = done.length;
 
-  const handleAddWork = async () => {
-    const newRow = {
-      taskId: currentId,
-      todo: "", // 초기값
-      worker: "",
-      date: "",
-      content: "",
-      status: "To Do",
-    };
-    setRows((prevRows) => [...prevRows, newRow]);
-    plusCurrentId();
+  // 동작 로직
+  const actions = {
+    edit: async (taskId, field, value) => {
+      const taskToEdit = tasks.find((task) => task.taskId === taskId);
+      if (taskToEdit) {
+        const updatedTask = { ...taskToEdit, [field]: value };
+        await updateTask({
+          projectId: id,
+          taskId,
+          task: updatedTask,
+        }).unwrap();
+        toast("작업이 성공적으로 수정되었습니다!");
+      }
+    },
+    add: async (newTask) => {
+      try {
+        await addTask({ projectId: id, task: newTask }).unwrap();
+        toast("작업이 성공적으로 추가되었습니다!");
+      } catch (error) {
+        console.error("Error adding task:", error);
+        toast.error("작업 추가를 실패했습니다.");
+      }
+    },
+    updateStatus: async (taskId, status) => {
+      const taskToUpdate = tasks.find((task) => task.taskId === taskId);
+      if (!taskToUpdate) return;
+
+      let newStatus;
+      if (status === "To Do") newStatus = "In Progress";
+      else if (status === "In Progress") newStatus = "Done";
+      else return;
+
+      const updatedTask = { ...taskToUpdate, status: newStatus };
+      try {
+        await updateTask({
+          projectId: id,
+          taskId,
+          task: updatedTask,
+        }).unwrap();
+        toast.info("작업 상태가 변경되었습니다!");
+      } catch (error) {
+        console.error("Error updating task status:", error);
+        toast.error("작업 상태 변경에 실패했습니다.");
+      }
+    },
+    deleteTask: async (taskId) => {
+      try {
+        await deleteTask({ projectId: id, taskId }).unwrap();
+        toast.info("작업이 성공적으로 삭제되었습니다!");
+      } catch (error) {
+        console.error("Error deleting task:", error);
+        toast.error("작업 삭제를 실패했습니다.");
+      }
+    },
   };
-
-  // 불필요한 useMemo 제거
-  const actions = useMemo(
-    () => ({
-      edit: async (rowId, field, value) => {
-        setRows((prevRows) =>
-          prevRows.map((row) =>
-            row.taskId === rowId ? { ...row, [field]: value } : row
-          )
-        );
-      },
-      add: async (rowId) => {
-        const newTask = rows.find((row) => row.taskId === rowId);
-        const newTodo = {
-          taskId: newTask.taskId,
-          todo: newTask.todo,
-          worker: newTask.worker,
-          date: newTask.date,
-          content: newTask.content,
-        };
-        try {
-          await addTask({ projectId: id, task: newTodo }).unwrap();
-          toast("작업이 성공적으로 저장되었습니다!");
-        } catch (error) {
-          console.error("Error saving task:", error);
-          toast.error("작업 저장을 실패했습니다.");
-        }
-      },
-      update: async (rowId) => {
-        const update = rows.find((row) => row.taskId === rowId);
-        const updateTodo = {
-          todo: update.todo,
-          worker: update.worker,
-          date: update.date,
-          content: update.content,
-        };
-        try {
-          await updateTask({
-            projectId: id,
-            taskId: rowId,
-            task: updateTodo,
-          }).unwrap();
-          toast("작업이 성공적으로 수정되었습니다!");
-        } catch (error) {
-          console.error("Error saving task:", error);
-          toast.error("작업 수정을 실패했습니다.");
-        }
-      },
-      updateStatus: async (rowId, status) => {
-        const update = rows.find((row) => row.taskId === rowId);
-
-        let newStatus;
-        if (status === "To Do") {
-          newStatus = "In Progress";
-        } else if (status === "In Progress") {
-          newStatus = "Done";
-        } else if (status === "Done") {
-          return;
-        }
-
-        const updateTodo = {
-          todo: update.todo,
-          worker: update.worker,
-          date: update.date,
-          content: update.content,
-          status: newStatus,
-        };
-        try {
-          await updateTask({
-            projectId: id,
-            taskId: rowId,
-            task: updateTodo,
-          }).unwrap();
-          toast.info("작업을 완료했습니다!");
-        } catch (error) {
-          console.error("Error saving task:", error);
-          toast.error("작업 완료를 실패했습니다.");
-        }
-      },
-      deleteTask: async (rowId) => {
-        try {
-          await deleteTask({ projectId: id, taskId: rowId }).unwrap();
-          toast.info("작업을 성공적으로 삭제했습니다!");
-        } catch (error) {
-          console.error("Error delete task:", error);
-          toast.error("작업 삭제를 실패했습니다.");
-        }
-      },
-    }),
-    [rows, id, addTask, updateTask, deleteTask]
-  );
-
+  
   return (
     <Home>
       <div className="work__top">
@@ -198,14 +132,14 @@ const Work = () => {
               todo={todo}
               inprogress={inprogress}
               done={done}
-              addWork={handleAddWork}
+              id={id}
             />
           ) : category === "board" ? (
             <BoardContainer
               todo={todo}
               inprogress={inprogress}
               done={done}
-              addWork={handleAddWork}
+              id={id}
             />
           ) : category === "commit" ? (
             <Commit repoName={name} orgName={org} />

@@ -42,7 +42,7 @@ export const projectSlice = createApi({
       query: (projectId) => `/project/${projectId}/tasks`,
       providesTags: ["Repo"],
       // 데이터 가공이 필요하다면 여기에서 작성
-      transformResponse: (response) => response.tasks,
+      //transformResponse: (response) => response.tasks,
     }),
     deleteTasks: builder.mutation({
       query: ({ projectId, taskId }) => ({
