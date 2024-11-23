@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
-import EditableTable from '../components/EditableTable';
+import React, { useState } from "react";
+//아이콘
 import { FaPlus } from "react-icons/fa6";
-import NewRow from './NewRow';
+//컴포넌트
+import EditableTable from "../components/EditableTable";
+import NewRow from "./NewRow";
 
 const ListSection = ({ data, title, $addWork, id }) => {
   const [isOpen, setIsOpen] = useState(false);
   const closeOpen = () => {
     setIsOpen(false);
-  }
+  };
   return (
-    <section id='listSection'>
+    <section id="listSection">
       <h2>{title}</h2>
       <EditableTable rows={data} />
       {$addWork ? (
@@ -18,13 +20,11 @@ const ListSection = ({ data, title, $addWork, id }) => {
             <FaPlus />
             <span>작업 추가</span>
           </div>
-          {isOpen ? (
-            <NewRow id={id} closeOpen={closeOpen} />
-          ) : null}
+          {isOpen && <NewRow id={id} closeOpen={closeOpen} />}
         </>
       ) : null}
     </section>
-  )
-}
+  );
+};
 
-export default ListSection
+export default ListSection;

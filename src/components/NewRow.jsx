@@ -5,6 +5,14 @@ import { FaRegCheckCircle } from "react-icons/fa";
 //api
 import { useFetchTasksQuery } from "../app/project";
 
+const formatDateForInput = (dateString) => {
+  const date = new Date(dateString || new Date());
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1 필요
+  const day = String(date.getDate()).padStart(2, "0"); // 두 자리로 맞춤
+  return `${year}-${month}-${day}`; // yyyy-MM-dd 형식 반환
+};
+
 const NewRow = ({ id, closeOpen }) => {
   //데이터를 추가하는 함수
   const { add } = useContext(actionContext);
@@ -14,7 +22,7 @@ const NewRow = ({ id, closeOpen }) => {
   });
   //마지막 taskId + 1
   const getNextTaskId = () =>
-  tasks.length !== 0 ? Math.max(...tasks.map((task) => task.taskId)) + 1 : 1;
+    tasks.length !== 0 ? Math.max(...tasks.map((task) => task.taskId)) + 1 : 1;
 
   const [taskData, setTaskData] = useState({
     taskId: getNextTaskId(),
@@ -25,23 +33,20 @@ const NewRow = ({ id, closeOpen }) => {
     status: "To Do",
   });
 
-  const formatDateForInput = (dateString) => {
-    const date = new Date(dateString || new Date());
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1 필요
-    const day = String(date.getDate()).padStart(2, '0'); // 두 자리로 맞춤
-    return `${year}-${month}-${day}`; // yyyy-MM-dd 형식 반환
-  };
-
   const handleAddTask = () => {
     // 데이터 검증 추가 (예: 필수 필드 확인)
-    if (!taskData.todo || !taskData.worker || !taskData.date || !taskData.content) {
+    if (
+      !taskData.todo ||
+      !taskData.worker ||
+      !taskData.date ||
+      !taskData.content
+    ) {
       alert("모든 필드를 입력하세요.");
       return;
     }
 
-  add(taskData);
-    closeOpen()
+    add(taskData);
+    closeOpen();
   };
 
   return (
@@ -58,7 +63,9 @@ const NewRow = ({ id, closeOpen }) => {
                 type="text"
                 placeholder="할 일 입력"
                 value={taskData.todo}
-                onChange={(e) => setTaskData({ ...taskData, todo: e.target.value })}
+                onChange={(e) =>
+                  setTaskData({ ...taskData, todo: e.target.value })
+                }
               />
             </div>
           </td>
@@ -68,7 +75,9 @@ const NewRow = ({ id, closeOpen }) => {
               className="input2"
               placeholder="담당자 입력"
               value={taskData.worker}
-              onChange={(e) => setTaskData({ ...taskData, worker: e.target.value })}
+              onChange={(e) =>
+                setTaskData({ ...taskData, worker: e.target.value })
+              }
             />
           </td>
           <td>
@@ -76,7 +85,9 @@ const NewRow = ({ id, closeOpen }) => {
               type="date"
               className="input3"
               value={taskData.date ? taskData.date : formatDateForInput()}
-              onChange={(e) => setTaskData({ ...taskData, date: e.target.value })}
+              onChange={(e) =>
+                setTaskData({ ...taskData, date: e.target.value })
+              }
             />
           </td>
           <td>
@@ -85,7 +96,9 @@ const NewRow = ({ id, closeOpen }) => {
                 type="text"
                 placeholder="내용 입력"
                 value={taskData.content}
-                onChange={(e) => setTaskData({ ...taskData, content: e.target.value })}
+                onChange={(e) =>
+                  setTaskData({ ...taskData, content: e.target.value })
+                }
               />
             </div>
           </td>

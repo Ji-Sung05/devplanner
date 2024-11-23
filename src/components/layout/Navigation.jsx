@@ -18,14 +18,13 @@ const Navigation = () => {
 
   return (
     <header id="header" role="banner">
-      <div className='topHeader'>
-        <FaGithub className='main-logo' color='white' />
-        <span className='main-title'>DevPlan</span>
+      <div className="topHeader">
+        <FaGithub className="main-logo" color="white" />
+        <span className="main-title">DevPlan</span>
       </div>
       <div className="bottomHeader">
         <ul className="nav">
           <NavItem
-            pathname={pathname}
             to={"/home"}
             text={"Overview"}
             icon={<HiOutlineBookOpen color="white" size={"20px"} />}
@@ -34,22 +33,19 @@ const Navigation = () => {
           pathname === "/home" ||
           pathname === "/manual" ||
           isWorkPage ? (
-            <NavItem 
-              pathname={pathname} 
-              to={"/organization"} 
+            <NavItem
+              to={"/organization"}
               text={"Organization"}
-              icon={<HiOutlineBookOpen color="white" size={"20px"} />} 
+              icon={<HiOutlineBookOpen color="white" size={"20px"} />}
             />
           ) : (
-            <NavItem 
-              pathname={pathname}
+            <NavItem
               to={"/repositories"}
               text={"repositories"}
               icon={<MdComputer color="white" size={"20px"} />}
             />
           )}
-          <NavItem 
-            pathname={pathname}
+          <NavItem
             to={"/manual"}
             text={"Manual"}
             icon={<IoMdHelpCircleOutline color="white" size={"20px"} />}
