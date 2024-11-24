@@ -5,7 +5,7 @@ import { GoPlusCircle } from "react-icons/go";
 import Card from "./UI/Card";
 import NewBoard from "./NewBoard";
 
-const BoardSection = ({ title, data, $addWork, id }) => {
+const BoardSection = ({ title, data, isAddWork, id }) => {
   const [isOpen, setIsOpen] = useState(false);
   const closeOpen = () => {
     setIsOpen(false);
@@ -17,7 +17,7 @@ const BoardSection = ({ title, data, $addWork, id }) => {
         {data.length > 0
           ? data.map((item) => <Card item={item} key={item.taskId} />)
           : null}
-        {$addWork ? (
+        {isAddWork ? (
           <>
             {isOpen && <NewBoard id={id} closeOpen={closeOpen} />}
             <div className="card__addwork" onClick={() => setIsOpen(!isOpen)}>
