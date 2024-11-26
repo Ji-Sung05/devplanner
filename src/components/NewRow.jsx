@@ -1,31 +1,28 @@
-import React, { useContext, useState } from "react";
-import { actionContext } from "../pages/Work";
+import React, { useState } from "react";
+//Toast 라이브러리
+import { toast } from "react-toastify";
 //아이콘
 import { FaRegCheckCircle } from "react-icons/fa";
 //api
-import { useFetchTasksQuery } from "../app/project";
+import { useAddTaskMutation, useFetchTasksQuery } from "../app/project";
+import { useLocation } from "react-router-dom";
 
-const formatDateForInput = (dateString) => {
-  const date = new Date(dateString || new Date());
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1 필요
-  const day = String(date.getDate()).padStart(2, "0"); // 두 자리로 맞춤
-  return `${year}-${month}-${day}`; // yyyy-MM-dd 형식 반환
-};
+// 작업 ID를 계산하는 헬퍼 함수
+const getNextTaskId = (tasks) =>
+  tasks.length !== 0 ? Math.max(...tasks.map((task) => task.taskId)) + 1 : 1;
 
-const NewRow = ({ id, closeOpen }) => {
-  //데이터를 추가하는 함수
-  const { add } = useContext(actionContext);
+const NewRow = ({ closeOpen }) => {
+  const location = useLocation();
+  const projectId = location.state?.id;
   //tasks에서 마지막 Id를 가져오기 위해 fetch
-  const { data: tasks = [] } = useFetchTasksQuery(id, {
-    skip: !id,
+  const { data: tasks = [] } = useFetchTasksQuery(projectId, {
+    skip: !projectId,
   });
-  //마지막 taskId + 1
-  const getNextTaskId = () =>
-    tasks.length !== 0 ? Math.max(...tasks.map((task) => task.taskId)) + 1 : 1;
+
+  const [addTask] = useAddTaskMutation();
 
   const [taskData, setTaskData] = useState({
-    taskId: getNextTaskId(),
+    taskId: getNextTaskId(tasks),
     todo: "",
     worker: "",
     date: "",
@@ -33,32 +30,24 @@ const NewRow = ({ id, closeOpen }) => {
     status: "To Do",
   });
 
-  const handleAddTask = () => {
-    // 데이터 검증 추가 (예: 필수 필드 확인)
-    if (
-      !taskData.todo ||
-      !taskData.worker ||
-      !taskData.date ||
-      !taskData.content
-    ) {
-      alert("모든 필드를 입력하세요.");
-      return;
+  const handleAddTask = async () => {
+    try {
+      await addTask({ projectId: projectId, task: taskData }).unwrap();
+      toast("작업이 성공적으로 추가되었습니다!");
+      closeOpen();
+    } catch (error) {
+      console.error("Error adding task:", error);
+      toast.error("작업 추가를 실패했습니다.");
     }
-
-    add(taskData);
-    closeOpen();
   };
 
   return (
-    <table>
+    <table className="table__body">
       <tbody>
         <tr>
           <td>
             <div>
-              <FaRegCheckCircle
-                color="white"
-                onClick={handleAddTask} // handleAddTask로 데이터 추가
-              />
+              <FaRegCheckCircle color="white" onClick={handleAddTask} />
               <input
                 type="text"
                 placeholder="할 일 입력"
@@ -84,7 +73,7 @@ const NewRow = ({ id, closeOpen }) => {
             <input
               type="date"
               className="input3"
-              value={taskData.date ? taskData.date : formatDateForInput()}
+              value={taskData.date}
               onChange={(e) =>
                 setTaskData({ ...taskData, date: e.target.value })
               }
