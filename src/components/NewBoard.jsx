@@ -1,26 +1,28 @@
-import React, { useContext, useState } from "react";
-import { actionContext } from "../pages/Work";
+import React, { useState } from "react";
+//Toast 라이브러리
+import { toast } from "react-toastify";
 //아이콘
 import { FaRegCheckCircle } from "react-icons/fa";
 //api
-import { useFetchTasksQuery } from "../app/project";
+import { useAddTaskMutation, useFetchTasksQuery } from "../app/project";
+import { useLocation } from "react-router-dom";
 
-const NewBoard = ({ id, closeOpen }) => {
-  const { add } = useContext(actionContext);
+// 작업 ID를 계산하는 헬퍼 함수
+const getNextTaskId = (tasks) =>
+  tasks.length !== 0 ? Math.max(...tasks.map((task) => task.taskId)) + 1 : 1;
+
+const NewBoard = ({ closeOpen }) => {
+  const location = useLocation();
+  const projectId = location.state?.id;
   //tasks에서 마지막 Id를 가져오기 위해 fetch
-  const { data: tasks = [] } = useFetchTasksQuery(id, {
-    skip: !id,
+  const { data: tasks = [] } = useFetchTasksQuery(projectId, {
+    skip: !projectId,
   });
 
-  //reduce를 통해 최대 Id 값 + 1 -> 배열 한 번 순회
-  function getNextTaskId() {
-    return tasks.length !== 0
-      ? tasks.reduce((maxId, task) => Math.max(maxId, task.taskId), 0) + 1
-      : 1;
-  }
+  const [addTask] = useAddTaskMutation();
 
   const [taskData, setTaskData] = useState({
-    taskId: getNextTaskId(),
+    taskId: getNextTaskId(tasks),
     todo: "",
     worker: "",
     date: "",
@@ -28,20 +30,15 @@ const NewBoard = ({ id, closeOpen }) => {
     status: "To Do",
   });
 
-  const handleAddTask = () => {
-    // 데이터 검증 추가 (예: 필수 필드 확인)
-    if (
-      !taskData.todo ||
-      !taskData.worker ||
-      !taskData.date ||
-      !taskData.content
-    ) {
-      alert("모든 필드를 입력하세요.");
-      return;
+  const handleAddTask = async () => {
+    try {
+      await addTask({ projectId: projectId, task: taskData }).unwrap();
+      toast("작업이 성공적으로 추가되었습니다!");
+      closeOpen();
+    } catch (error) {
+      console.error("Error adding task:", error);
+      toast.error("작업 추가를 실패했습니다.");
     }
-
-    add(taskData);
-    closeOpen();
   };
 
   return (
