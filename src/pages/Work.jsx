@@ -24,14 +24,6 @@ const Work = () => {
     skip: !id,
   });
 
-  const todo = tasks.filter((task) => {
-    return task.status === "To Do";
-  });
-
-  const inprogress = tasks.filter((task) => {
-    return task.status === "In Progress";
-  });
-
   const done = tasks.filter((task) => {
     return task.status === "Done";
   });
@@ -56,9 +48,9 @@ const Work = () => {
       <div className={`work__inner ${category === "commit" ? "no-gap" : ""}`}>
         <TableHeader doneLength={doneLength} category={category} />
         {category === "" || category === "list" ? (
-          <ListContainer todo={todo} inprogress={inprogress} done={done} />
+          <ListContainer />
         ) : category === "board" ? (
-          <BoardContainer todo={todo} inprogress={inprogress} done={done} />
+          <BoardContainer />
         ) : category === "commit" ? (
           <Commit repoName={name} orgName={org} />
         ) : null}
