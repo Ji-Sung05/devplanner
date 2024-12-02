@@ -11,27 +11,18 @@ import NewRow from "./NewRow";
 const ListContainer = () => {
   const location = useLocation();
   const projectId = location.state?.id;
-
-  const { data: tasks = [] } = useFetchTasksQuery(projectId, {
-    skip: !projectId,
-  });
-
-  const todo = tasks.filter((task) => {
-    return task.status === "To Do";
-  });
-
-  const inprogress = tasks.filter((task) => {
-    return task.status === "In Progress";
-  });
-
-  const done = tasks.filter((task) => {
-    return task.status === "Done";
-  });
-
   const [isOpen, setIsOpen] = useState(false);
   const closeOpen = () => {
     setIsOpen(false);
   };
+
+  const { data: tasks = [], isLoading } = useFetchTasksQuery(projectId, {
+    skip: !projectId,
+  });
+
+  if (isLoading) {
+    return <div>isLoading...</div>;
+  }
 
   return (
     <div id="listcontainer">
@@ -39,7 +30,7 @@ const ListContainer = () => {
         <h2>할 일</h2>
         <table className="table__body">
           <tbody>
-            {todo.map((row) => (
+            {tasks.todo.map((row) => (
               <EditRow key={row.taskId} row={row} />
             ))}
           </tbody>
@@ -54,7 +45,7 @@ const ListContainer = () => {
         <h2>진행중</h2>
         <table className="table__body">
           <tbody>
-            {inprogress.map((row) => (
+            {tasks.inprogress.map((row) => (
               <EditRow key={row.taskId} row={row} />
             ))}
           </tbody>
@@ -64,7 +55,7 @@ const ListContainer = () => {
         <h2>작업 완료</h2>
         <table className="table__body">
           <tbody>
-            {done.map((row) => (
+            {tasks.done.map((row) => (
               <EditRow key={row.taskId} row={row} />
             ))}
           </tbody>

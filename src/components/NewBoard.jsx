@@ -15,20 +15,24 @@ const NewBoard = ({ closeOpen }) => {
   const location = useLocation();
   const projectId = location.state?.id;
   //tasks에서 마지막 Id를 가져오기 위해 fetch
-  const { data: tasks = [] } = useFetchTasksQuery(projectId, {
+  const { data: tasks = [], isLoading } = useFetchTasksQuery(projectId, {
     skip: !projectId,
   });
 
   const [addTask] = useAddTaskMutation();
 
   const [taskData, setTaskData] = useState({
-    taskId: getNextTaskId(tasks),
+    taskId: getNextTaskId(tasks.tasks),
     todo: "",
     worker: "",
     date: "",
     content: "",
     status: "To Do",
   });
+
+  if (isLoading) {
+    return <div>isLoading...</div>;
+  }
 
   const handleAddTask = async () => {
     try {

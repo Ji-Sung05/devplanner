@@ -20,15 +20,15 @@ const Work = () => {
   const [category, setCategory] = useState("");
 
   // 여기서는 useFetchTasksQuery에서 가공된 데이터를 바로 사용
-  const { data: tasks = [] } = useFetchTasksQuery(id, {
+  const { data: tasks = [], isLoading } = useFetchTasksQuery(id, {
     skip: !id,
   });
 
-  const done = tasks.filter((task) => {
-    return task.status === "Done";
-  });
+  if (isLoading) {
+    return <div>isLoading...</div>;
+  }
 
-  let doneLength = done.length;
+  const doneLength = tasks.done.length;
 
   return (
     <Home>
