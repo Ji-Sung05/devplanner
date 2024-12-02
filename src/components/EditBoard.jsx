@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 //Toast 라이브러리
 import { toast } from "react-toastify";
+//api
 import {
   useDeleteTasksMutation,
   useFetchTasksQuery,
   useUpdateTaskMutation,
 } from "../app/project";
-import { useLocation } from "react-router-dom";
 
 // 날짜 형식을 'yyyy-MM-dd'로 변환하는 함수
 const toLocalDateFormat = (isoDate) => {
@@ -15,23 +16,21 @@ const toLocalDateFormat = (isoDate) => {
   return date.toISOString().split("T")[0]; // ISO 형식에서 'yyyy-MM-dd' 부분만 추출
 };
 
-// 'To Do' 상태의 작업을 필터링하는 함수
-const getToDoTasks = (tasks) => tasks.filter((task) => task.status === "To Do");
-
 const EditBoard = ({ item }) => {
   const location = useLocation();
   const projectId = location.state?.id;
 
+  const [isOption, setIsOption] = useState(false);
+  const toggleOption = () => setIsOption((prev) => !prev);
+
   //To Do 데이터 가져오기
-  const { data: tasks = [] } = useFetchTasksQuery(projectId, {
+  const { data: tasks = [], isLoading } = useFetchTasksQuery(projectId, {
     skip: !projectId,
   });
-  const todo = getToDoTasks(tasks);
 
   const [deleteTask] = useDeleteTasksMutation();
   const [updateTask] = useUpdateTaskMutation();
 
-  const [isOption, setIsOption] = useState(false);
   const [taskData, setTaskData] = useState({
     todo: item.todo || "",
     worker: item.worker || "",
@@ -39,14 +38,9 @@ const EditBoard = ({ item }) => {
     content: item.content || "",
   });
 
-  const toggleOption = () => setIsOption((prev) => !prev);
-
-  // 새로운 상태를 반환하는 함수
-  const getNewStatus = (currentStatus) => {
-    if (currentStatus === "To Do") return "In Progress";
-    if (currentStatus === "In Progress") return "Done";
-    return null; // 상태 변경 없음
-  };
+  if (isLoading) {
+    return <div>isLoading...</div>;
+  }
 
   // 공통 작업 실행 함수
   const executeTaskAction = async (action, message, payload) => {
@@ -72,10 +66,14 @@ const EditBoard = ({ item }) => {
   };
   //작업 상태 변경
   const updateStatusHandler = (taskId, status) => {
-    const taskToUpdate = todo.find((task) => task.taskId === taskId);
+    const taskToUpdate = tasks.todo.find((task) => task.taskId === taskId);
     if (!taskToUpdate) return;
 
-    const newStatus = getNewStatus(status);
+    const newStatus = (() => {
+      if (status === "To Do") return "In Progress";
+      if (status === "In Progress") return "Done";
+      return null; // 상태 변경 없음
+    })();
     if (!newStatus) return;
 
     const updatedTask = { ...taskToUpdate, status: newStatus };
