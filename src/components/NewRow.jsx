@@ -7,10 +7,6 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { useAddTaskMutation, useFetchTasksQuery } from "../app/project";
 import { useLocation } from "react-router-dom";
 
-// 작업 ID를 계산하는 헬퍼 함수
-const getNextTaskId = (tasks) =>
-  tasks.length !== 0 ? Math.max(...tasks.map((task) => task.taskId)) + 1 : 1;
-
 const NewRow = ({ closeOpen }) => {
   const location = useLocation();
   const projectId = location.state?.id;
@@ -22,7 +18,8 @@ const NewRow = ({ closeOpen }) => {
   const [addTask] = useAddTaskMutation();
 
   const [taskData, setTaskData] = useState({
-    taskId: getNextTaskId(tasks.tasks),
+    taskId:
+      tasks.tasks.reduce((acc, task) => Math.max(acc, task.taskId), 0) + 1,
     todo: "",
     worker: "",
     date: "",
