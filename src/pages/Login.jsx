@@ -1,14 +1,10 @@
 import React from 'react'
 import { IoLogoGithub } from "react-icons/io";
-import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:4000'
-  const navigate = useNavigate();
   const loginForm = (e) => {
     e.preventDefault();
-    window.location.href = `${baseUrl}/auth`;
-    navigate('/home');
+    window.location.href = `http://localhost:4000/auth`;
   }
   return (
     <section id='login__container'>

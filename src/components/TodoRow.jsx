@@ -1,4 +1,5 @@
 import React from 'react'
+//아이콘
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
 

@@ -2,10 +2,11 @@ import React from 'react';
 //날짜와 시간을 다루기 위한 라이브러리
 import moment from 'moment';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
-import Modal from 'react-modal';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
-
+//material UI
+import Modal from 'react-modal';
+//utils
 import useEvents from '../utils/useEvents';
 import useModal from '../utils/useModal';
 

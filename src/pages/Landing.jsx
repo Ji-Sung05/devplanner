@@ -1,9 +1,12 @@
 import React from 'react'
-import TodoContainer from '../components/TodoContainer'
-import CalendarCard from '../components/CalendarCard'
-import { useFetchTodosQuery } from '../app/todoSlice';
+//Toast 라이브러리
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+//컴포넌트
+import TodoContainer from '../components/TodoContainer'
+import CalendarCard from '../components/CalendarCard'
+//api
+import { useFetchTodosQuery } from '../app/todoSlice';
 
 const Landing = () => {
   const { data: tasks = [] } = useFetchTodosQuery();

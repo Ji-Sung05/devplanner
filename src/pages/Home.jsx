@@ -1,18 +1,20 @@
 import React from 'react'
-import Header from '../components/layout/Header'
-import Aside from '../components/layout/Aside'
-import Main from '../components/layout/Main'
-import Landing from './Landing'
 import { useLocation } from 'react-router-dom'
+//레이아웃
+import Navigation from './../components/layout/Navigation';
+import SideBar from './../components/layout/SideBar';
+import Main from '../components/layout/Main'
+//페이지
+import Landing from './Landing'
 
 const Home = (props) => {
   const location = useLocation()
   const isWorkPage = location.pathname.slice(0,5) === '/work';
   return (
     <div id='container'>
-      <Header />
+      <Navigation />
       <div className={`container__inner ${isWorkPage ? 'work' : ''}`}>
-        <Aside />
+        <SideBar />
         <Main>
           {props.children ? props.children : <Landing />}
         </Main>
