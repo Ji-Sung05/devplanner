@@ -8,10 +8,9 @@ import {
   useFetchTasksQuery,
   useUpdateTaskMutation,
 } from "../app/project";
-//utils
 import { toLocalDateFormat } from "../utils/dateUtils";
 
-const EditRow = ({ row }) => {
+const EditBoard = ({ item }) => {
   const location = useLocation();
   const projectId = location.state?.id;
 
@@ -27,10 +26,10 @@ const EditRow = ({ row }) => {
   const [updateTask] = useUpdateTaskMutation();
 
   const [taskData, setTaskData] = useState({
-    todo: row.todo || "",
-    worker: row.worker || "",
-    date: toLocalDateFormat(row.date),
-    content: row.content || "",
+    todo: item.todo || "",
+    worker: item.worker || "",
+    date: toLocalDateFormat(item.date),
+    content: item.content || "",
   });
 
   if (isLoading) {
@@ -103,55 +102,53 @@ const EditRow = ({ row }) => {
   };
 
   return (
-    <tr>
-      <td>
-        <div>
+    <div id="card">
+      <div className="card__inner">
+        <div className="card__top">
           <div className="option">
             <span onClick={toggleOption}>:</span>
             {isOption && (
               <ul>
-                <li onClick={() => updateHandler(row.taskId)}>수정하기</li>
-                <li onClick={() => deleteHandler(row.taskId)}>삭제하기</li>
-                <li onClick={() => updateStatusHandler(row.taskId, row.status)}>
+                <li onClick={() => updateHandler(item.taskId)}>수정하기</li>
+                <li onClick={() => deleteHandler(item.taskId)}>삭제하기</li>
+                <li
+                  onClick={() => updateStatusHandler(item.taskId, item.status)}
+                >
                   완료
                 </li>
               </ul>
             )}
           </div>
+          <div>
+            <input
+              type="text"
+              value={taskData.todo}
+              onChange={(e) => handleChange("todo", e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="card__middle">
           <input
             type="text"
-            value={taskData.todo}
-            onChange={(e) => handleChange("todo", e.target.value)}
+            value={taskData.worker}
+            onChange={(e) => handleChange("worker", e.target.value)}
+          />
+          <input
+            type="date"
+            value={taskData.date}
+            onChange={(e) => handleChange("date", e.target.value)}
           />
         </div>
-      </td>
-      <td>
-        <input
-          type="text"
-          className="input2"
-          value={taskData.worker}
-          onChange={(e) => handleChange("worker", e.target.value)}
-        />
-      </td>
-      <td>
-        <input
-          type="date"
-          className="input3"
-          value={taskData.date}
-          onChange={(e) => handleChange("date", e.target.value)}
-        />
-      </td>
-      <td>
-        <div>
+        <div className="card__bottom">
           <input
             type="text"
             value={taskData.content}
             onChange={(e) => handleChange("content", e.target.value)}
           />
         </div>
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 };
 
-export default EditRow;
+export default EditBoard;

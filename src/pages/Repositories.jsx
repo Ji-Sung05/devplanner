@@ -3,7 +3,7 @@ import Home from './Home';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BsCopy } from "react-icons/bs";
 import CreateBtn from '../components/UI/CreateBtn';
-import { useCloneRepoMutation, useGetReposQuery, useDeleteRepoMutation } from '../app/apiSlice';
+import { useCloneRepoMutation, useGetReposQuery } from '../app/apiSlice';
 import { useCreateProjectMutation } from '../app/project';
 
 const Repositories = () => {
@@ -16,7 +16,6 @@ const Repositories = () => {
     skip: !org,
   });
   const [cloneRepo] = useCloneRepoMutation();
-  const [deleteRepo] = useDeleteRepoMutation();
   const [createProject] = useCreateProjectMutation();
 
   const [filterText, setFilterText] = useState('');
@@ -36,12 +35,14 @@ const Repositories = () => {
   const createClick = () => {
     navigate('/create-repo', { state: { org } });
   };
-  
+
   const handleRepoClick = async (name, id, org) => {
-    setTimeout(async () => {
+    try {
       await createProject({ id });
       navigate(`/work/${name}`, { state: { id, name, org } });
-    }, 0);
+    } catch(error) {
+      console.error('Failed to create project: ', error);
+    }
   };
   
   const handleCloneClick = (orgName, repoName, e) => {
@@ -57,20 +58,6 @@ const Repositories = () => {
           });
       }
     });
-  };
-
-  const handleDeleteClick = async (orgName, repoName, e) => {
-    e.stopPropagation();
-    if (window.confirm(`정말로 ${repoName} 레포지토리를 삭제하시겠습니까?`)) {
-      try {
-        await deleteRepo({ orgName, repoName });
-        alert(`${repoName} 레포지토리가 삭제되었습니다.`);
-        refetch();  // 삭제 후 레포지토리 목록 다시 불러오기
-      } catch (error) {
-        console.error('레포지토리 삭제 중 오류 발생:', error);
-        alert('레포지토리 삭제에 실패했습니다.');
-      }
-    }
   };
 
   const handleFilterChange = (e) => {

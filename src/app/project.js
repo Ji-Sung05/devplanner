@@ -6,53 +6,67 @@ export const projectSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_BASE_URL,
     prepareHeaders: (headers) => {
-      const token = getCookie('token');
-      if(token) {
-        headers.set('authorization', `Bearer ${token}`);
+      const token = getCookie("token");
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
       }
       return headers;
     },
   }),
   tagTypes: ["Repo"],
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     createProject: builder.mutation({
-      query: ({id}) => ({
+      query: ({ id }) => ({
         url: `/project`,
-        method: 'POST',
-        body: {id}
-      })
+        method: "POST",
+        body: { id },
+      }),
     }),
     addTask: builder.mutation({
       query: ({ projectId, task }) => ({
         url: `/project/${projectId}/tasks`,
-        method: 'POST',
+        method: "POST",
         body: task,
       }),
-      invalidatesTags: ['Repo'],
+      invalidatesTags: ["Repo"],
     }),
     updateTask: builder.mutation({
       query: ({ projectId, taskId, task }) => ({
         url: `/project/${projectId}/tasks/${taskId}`,
-        method: 'PUT',
-        body: task
+        method: "PUT",
+        body: task,
       }),
-      invalidatesTags: ['Repo'],
+      invalidatesTags: ["Repo"],
     }),
     fetchTasks: builder.query({
       query: (projectId) => `/project/${projectId}/tasks`,
-      providesTags: ['Repo']
+      providesTags: ["Repo"],
+      // 데이터 가공이 필요하다면 여기에서 작성
+      transformResponse: (response) => ({
+        tasks: response,
+        todo: response.filter((task) => task.status === "To Do"),
+        inprogress: response.filter((task) => task.status === "In Progress"),
+        done: response.filter((task) => task.status === "Done"),
+      }),
     }),
     deleteTasks: builder.mutation({
       query: ({ projectId, taskId }) => ({
         url: `/project/${projectId}/tasks/${taskId}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
-      invalidatesTags: ['Repo'],
+      invalidatesTags: ["Repo"],
     }),
     fetchCommits: builder.query({
       query: ({ orgName, repoName }) => `/commits/${orgName}/${repoName}`,
     }),
-  })
-})
+  }),
+});
 
-export const { useCreateProjectMutation, useAddTaskMutation, useUpdateTaskMutation, useFetchTasksQuery, useFetchCommitsQuery, useDeleteTasksMutation } = projectSlice
+export const {
+  useCreateProjectMutation,
+  useAddTaskMutation,
+  useUpdateTaskMutation,
+  useFetchTasksQuery,
+  useFetchCommitsQuery,
+  useDeleteTasksMutation,
+} = projectSlice;
