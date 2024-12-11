@@ -3,8 +3,6 @@ import { useLocation } from "react-router-dom";
 //Toast 라이브러리
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-//api
-import { useFetchTasksQuery } from "../app/project";
 //pages
 import Home from "./Home";
 //components
@@ -15,20 +13,9 @@ import ListContainer from "./../components/ListContainer";
 
 const Work = () => {
   const location = useLocation();
-  const { id, name, org } = location.state;
+  const { name } = location.state;
 
   const [category, setCategory] = useState("");
-
-  // 여기서는 useFetchTasksQuery에서 가공된 데이터를 바로 사용
-  const { data: tasks = [], isLoading } = useFetchTasksQuery(id, {
-    skip: !id,
-  });
-
-  if (isLoading) {
-    return <div>isLoading...</div>;
-  }
-
-  const doneLength = tasks.done.length;
 
   return (
     <Home>
@@ -46,13 +33,13 @@ const Work = () => {
         </select>
       </div>
       <div className={`work__inner ${category === "commit" ? "no-gap" : ""}`}>
-        <TableHeader doneLength={doneLength} category={category} />
+        <TableHeader category={category} />
         {category === "" || category === "list" ? (
           <ListContainer />
         ) : category === "board" ? (
           <BoardContainer />
         ) : category === "commit" ? (
-          <Commit repoName={name} orgName={org} />
+          <Commit repoName={name} />
         ) : null}
       </div>
       <ToastContainer position="bottom-right" theme="light" autoClose={1500} />
