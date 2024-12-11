@@ -8,6 +8,7 @@ import {
   useFetchTasksQuery,
   useUpdateTaskMutation,
 } from "../app/project";
+//utils
 import { toLocalDateFormat } from "../utils/dateUtils";
 
 const EditRow = ({ row }) => {
@@ -60,7 +61,9 @@ const EditRow = ({ row }) => {
   };
   //작업 상태 변경
   const updateStatusHandler = (taskId, status) => {
-    const taskToUpdate = tasks.todo.find((task) => task.taskId === taskId);
+    const taskToUpdate = [...tasks.todo, ...tasks.inprogress].find(
+      (task) => task.taskId === taskId
+    );
     if (!taskToUpdate) return;
 
     const newStatus = (() => {

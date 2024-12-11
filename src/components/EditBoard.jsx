@@ -60,7 +60,9 @@ const EditBoard = ({ item }) => {
   };
   //작업 상태 변경
   const updateStatusHandler = (taskId, status) => {
-    const taskToUpdate = tasks.todo.find((task) => task.taskId === taskId);
+    const taskToUpdate = [...tasks.todo, ...tasks.inprogress].find(
+      (task) => task.taskId === taskId
+    );
     if (!taskToUpdate) return;
 
     const newStatus = (() => {
