@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getCookie } from "../cookies/Cookies";
+
 export const userSlice = createApi({
   reducerPath: "user",
   baseQuery: fetchBaseQuery({
@@ -20,6 +21,7 @@ export const userSlice = createApi({
       query: () => ({
         url: '/logout',
         method: "GET",
+        credentials: "include",
       })
     }),
   })

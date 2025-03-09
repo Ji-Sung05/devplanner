@@ -1,26 +1,17 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { useGetAuthQuery, useLogoutMutation } from '../app/usersSlice';
+import React, { createContext, useState } from 'react';
+import { useLogoutMutation } from '../app/usersSlice';
 import { getCookie } from '../cookies/Cookies';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const { isSuccess } = useGetAuthQuery();
   const [logout] = useLogoutMutation()
-  const [isAuth, setIsAuth] = useState(isSuccess);
   let token = getCookie('token');
-
-  useEffect(() => {
-    if (!token) {
-      setIsAuth(false);
-    } else {
-      setIsAuth(isSuccess);
-    }
-  }, [token, isSuccess]);
+  const [isAuth, setIsAuth] = useState(token);
 
   const handleLogout = async () => {
     try {
-      //await logout().unwrap();
+      await logout().unwrap();
       setIsAuth(false);
       window.location.href = "/";
     } catch (err) {
